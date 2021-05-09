@@ -7,7 +7,8 @@ import { PizzaImg } from './media';
 import { TomatoImg } from './media';
 
 import AppProvider from './AppContext';
-import Ingredient from './components/Ingredient/Ingredient';
+import Ingredient from './components/Ingredient/IngredientC';
+import Test from './components/Ingredient/test';
 
 function App() {
 

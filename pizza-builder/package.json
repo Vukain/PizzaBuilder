@@ -1,6 +1,6 @@
 {
-  "name": "pizza-vs-pizza",
-  "homepage": "https://vukain.github.io/PizzaVS",
+  "name": "pizza-builder",
+  "homepage": "https://vukain.github.io/PizzaBuilder",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
