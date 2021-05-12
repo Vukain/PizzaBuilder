@@ -21,10 +21,11 @@ function App() {
       <div className="App" >
 
         <div className="pizza_building" ref={resultWrapper}>
-          <PizzaImg className='pizza' />
+          <PizzaImg className="pizza" />
         </div>
-
-        <Ingredient />
+        <div className="ingred_dispencer">
+          <Ingredient type="tomato"/>
+        </div>
 
       </div>
     </AppProvider>
