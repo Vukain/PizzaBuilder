@@ -1,20 +1,18 @@
 import React, { Component, Suspense } from 'react';
 
-import { TomatoImg, OnionImgss } from '../../media';
+// import { TomatoImg, OnionImgss } from '../../media';
 
 import './Ingredient.sass';
 
-const Tomato = React.lazy(() => import('./Tomato'));
-
 const OnionImg = React.lazy(() => import('../../media/onion.svg'));
-
+const TomatoImg = React.lazy(() => import('../../media/tomato.svg'));
 const PepperImg = React.lazy(() => import('../../media/pepper.svg'));
 
 class Ingredient extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { x: 100, y: 100, relX: 0, relY: 0, scale: 1, cursor: 'grab', ingredients: { pepper: PepperImg } }
+        this.state = { x: 100, y: 100, relX: 0, relY: 0, scale: 1, cursor: 'grab', ingredients: { pepper: PepperImg, tomato: TomatoImg, onion: OnionImg } }
         this.onMouseMoveHandler = this.onMouseMoveHandler.bind(this)
     }
 
@@ -39,21 +37,22 @@ class Ingredient extends Component {
 
     render() {
 
-        const Io = this.state.ingredients['pepper']
+        const Io = this.state.ingredients[this.props.type]
 
-        return (<div className="xxx">
+        return (
+            <div className="xxx">
 
-            <Suspense fallback={<div>Wczytywanie...</div>}>
-                < Io onMouseDown={this.onMouseDownHandler} onMouseUp={this.onMouseUpHandler} style={{
-                    top: `${this.state.y}px`,
-                    left: `${this.state.x}px`,
-                    transform: `scale(${this.state.scale})`,
-                    cursor: `${this.state.cursor}`,
-                }} />
-            </Suspense>
+                <Suspense fallback={<div>Wczytywanie...</div>}>
+                    < Io onMouseDown={this.onMouseDownHandler} onMouseUp={this.onMouseUpHandler} style={{
+                        top: `${this.state.y}px`,
+                        left: `${this.state.x}px`,
+                        transform: `scale(${this.state.scale})`,
+                        cursor: `${this.state.cursor}`,
+                    }} />
+                </Suspense>
 
 
-        </div>);
+            </div>);
     }
 }
 
