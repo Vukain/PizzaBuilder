@@ -12,7 +12,7 @@ class Ingredient extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { x: 100, y: 100, relX: 0, relY: 0, scale: 1, cursor: 'grab', ingredients: { pepper: PepperImg, tomato: TomatoImg, onion: OnionImg } }
+        this.state = { x: 100, y: 100, relX: 0, relY: 0, scale: 1, rotate: 0, cursor: 'grab', ingredients: { pepper: PepperImg, tomato: TomatoImg, onion: OnionImg } }
         this.onMouseMoveHandler = this.onMouseMoveHandler.bind(this)
     }
 
@@ -48,7 +48,7 @@ class Ingredient extends Component {
             }}>
 
                 <Suspense fallback={<div>Wczytywanie...</div>}>
-                    < Io />
+                    < Io style={{ transform: `rotateZ(${this.state.rotate}deg)` }} />
                 </Suspense>
 
 
