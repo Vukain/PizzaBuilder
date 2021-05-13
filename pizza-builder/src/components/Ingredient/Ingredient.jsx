@@ -1,46 +1,60 @@
-import React, { useCallback, useState } from 'react';
+import React, { Component, Suspense } from 'react';
 
-import { TomatoImg } from '../../media';
+// import { TomatoImg, OnionImgss } from '../../media';
 
 import './Ingredient.sass';
 
-const Ingredient = (props) => {
+const OnionImg = React.lazy(() => import('../../media/onion.svg'));
+const TomatoImg = React.lazy(() => import('../../media/tomato.svg'));
+const PepperImg = React.lazy(() => import('../../media/pepper.svg'));
 
-    const [posX, setPosX] = useState(100);
-    const [posY, setPosY] = useState(100);
-    const [relX, setRelX] = useState(50);
-    const [relY, setRelY] = useState(50);
+class Ingredient extends Component {
 
-    const onMouseMoveHandler = useCallback((e, x, y) => {
-
-        console.log(x, y)
-        const { clientX, clientY } = e;
-        setPosX(clientX - x);
-        setPosY(clientY - y);
-    }, [])
-
-    const onMouseDownHandler = (e) => {
-        // console.log(posX)
-        // console.log(posX)
-        const { clientX, clientY } = e;
-        setRelX(clientX - posX);
-        setRelY(clientY - posY);
-        // console.log(clicked)
-        window.addEventListener('mousemove', (e) => onMouseMoveHandler(e, relX, relY))
+    constructor(props) {
+        super(props);
+        this.state = { x: 100, y: 100, relX: 0, relY: 0, scale: 1, cursor: 'grab', ingredients: { pepper: PepperImg, tomato: TomatoImg, onion: OnionImg } }
+        this.onMouseMoveHandler = this.onMouseMoveHandler.bind(this)
     }
 
-    const onMouseUpHandler = (e) => {
-        // console.log(3)
-        window.removeEventListener('mousemove', onMouseMoveHandler)
+    onMouseMoveHandler = (e) => {
+        const { clientX, clientY } = e;
+        this.setState((prevState) => ({ x: clientX - prevState.relX, y: clientY - prevState.relY }))
     }
 
-    return (
-        <div className="ingred_portal" onMouseDown={onMouseDownHandler} onMouseUp={onMouseUpHandler}>
-            <p>{posX}</p>
-            <TomatoImg className='tomato' style={{
-                transform: `translate(${posX}px, ${posY}px)`
-            }} />
-        </div>);
+    onMouseDownHandler = (e) => {
+        // console.log(posX)
+
+        const { clientX, clientY } = e;
+        this.setState({ relX: clientX - this.state.x, relY: clientY - this.state.y, scale: 1.2, cursor: 'grabbing' })
+        window.addEventListener('mousemove', this.onMouseMoveHandler)
+    }
+
+    onMouseUpHandler = (e) => {
+        console.log('die bastard')
+        this.setState({ scale: 1, cursor: 'grab' })
+        window.removeEventListener('mousemove', this.onMouseMoveHandler)
+    }
+
+    render() {
+
+        const Io = this.state.ingredients[this.props.type]
+
+        return (
+            <div className="xxx" onMouseDown={this.onMouseDownHandler} onMouseUp={this.onMouseUpHandler} style={{
+                top: `${this.state.y}px`,
+                left: `${this.state.x}px`,
+                transform: `scale(${this.state.scale})`,
+                cursor: `${this.state.cursor}`,
+            }}>
+
+                <Suspense fallback={<div>Wczytywanie...</div>}>
+                    < Io />
+                </Suspense>
+
+
+            </div>);
+    }
 }
 
 export default Ingredient;
+
