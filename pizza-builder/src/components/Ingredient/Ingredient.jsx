@@ -40,14 +40,14 @@ class Ingredient extends Component {
         const Io = this.state.ingredients[this.props.type]
 
         return (
-            <div className="xxx" onMouseDown={this.onMouseDownHandler} onMouseUp={this.onMouseUpHandler} style={{
+            <div className="ingredient" onMouseDown={this.onMouseDownHandler} onMouseUp={this.onMouseUpHandler} style={{
                 top: `${this.state.y}px`,
                 left: `${this.state.x}px`,
                 transform: `scale(${this.state.scale})`,
                 cursor: `${this.state.cursor}`,
             }}>
 
-                <Suspense fallback={<div>Wczytywanie...</div>}>
+                <Suspense fallback={<div></div>}>
                     < Io style={{ transform: `rotateZ(${this.state.rotate}deg)` }} />
                 </Suspense>
 

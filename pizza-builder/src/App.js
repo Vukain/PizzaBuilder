@@ -16,13 +16,18 @@ function App() {
 
   const [ingreds, setIngreds] = useState([]);
 
-  let transformIngredients = Object.keys(ingreds)
-  .map(igKey => {
-      return [...Array(ingreds[igKey])]
-          .map((_, i) => <Ingredient key={igKey + i} type={ingreds[igKey]} />);
-  }).reduce((arr, el) => {
-      return arr.concat(el)
-  }, []);
+  // let transformIngredients = Object.keys(ingreds)
+  // .map(igKey => {
+  //     return [...Array(ingreds[igKey])]
+  //         .map((_, i) => <Ingredient key={igKey + i} type={ingreds[igKey]} />);
+  // }).reduce((arr, el) => {
+  //     return arr.concat(el)
+  // }, []);
+
+  // const transformIngredients = [];
+  // ingreds.forEach(el => transformIngredients2.push(<Ingredient type={el} />));
+
+  let transformIngredients = ingreds.map((el, i) => <Ingredient key={el + i} type={el} />);
 
   return (
     <AppProvider>

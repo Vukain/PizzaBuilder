@@ -12,8 +12,7 @@ const AddInredient = (props) => {
 
     return (
         <div>
-            <h2>Add {props.type} </h2>
-            <button className='ingred_add__button' onClick={onAddHandler}>+</button>
+            <button className='ingred_add__button' onClick={onAddHandler}>Add {props.type}</button>
         </div>);
 }
 
