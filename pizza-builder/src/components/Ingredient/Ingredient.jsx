@@ -21,18 +21,26 @@ class Ingredient extends Component {
         this.setState((prevState) => ({ x: clientX - prevState.relX, y: clientY - prevState.relY }))
     }
 
-    onMouseDownHandler = (e) => {
-        // console.log(posX)
+    onScrollHandler = (e) => {
+        const { deltaY } = e;
+        if (deltaY > 0) {
+            this.setState(prevState => ({ rotate: prevState.rotate + 5 }))
+        } else {
+            this.setState(prevState => ({ rotate: prevState.rotate - 5 }))
+        }
+    }
 
+    onMouseDownHandler = (e) => {
         const { clientX, clientY } = e;
         this.setState({ relX: clientX - this.state.x, relY: clientY - this.state.y, scale: 1.2, cursor: 'grabbing' })
-        window.addEventListener('mousemove', this.onMouseMoveHandler)
+        window.addEventListener('mousemove', this.onMouseMoveHandler);
+        window.addEventListener('wheel', this.onScrollHandler);
     }
 
     onMouseUpHandler = (e) => {
-        console.log('die bastard')
         this.setState({ scale: 1, cursor: 'grab' })
         window.removeEventListener('mousemove', this.onMouseMoveHandler)
+        window.removeEventListener('wheel', this.onScrollHandler);
     }
 
     render() {
@@ -50,7 +58,6 @@ class Ingredient extends Component {
                 <Suspense fallback={<div></div>}>
                     < Io style={{ transform: `rotateZ(${this.state.rotate}deg)` }} />
                 </Suspense>
-
 
             </div>);
     }

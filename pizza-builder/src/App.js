@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import gsap from 'gsap';
 
 import './App.sass';
@@ -6,48 +6,24 @@ import './App.sass';
 import { PizzaImg } from './media';
 
 import AppProvider from './AppContext';
-import Ingredient from './components/Ingredient/Ingredient';
-import AddIngredient from './components/AddIngredient/AddIngredient';
+
+import AddPanel from './components/AddPanel/AddPanel';
+import IngredientDispencer from './components/IngredientDispencer/IngredientDispencer';
 
 function App() {
-
-  const resultWrapper = useRef(null);
-  const inputWrapper = useRef(null);
-
-  const [ingreds, setIngreds] = useState([]);
-
-  // let transformIngredients = Object.keys(ingreds)
-  // .map(igKey => {
-  //     return [...Array(ingreds[igKey])]
-  //         .map((_, i) => <Ingredient key={igKey + i} type={ingreds[igKey]} />);
-  // }).reduce((arr, el) => {
-  //     return arr.concat(el)
-  // }, []);
-
-  // const transformIngredients = [];
-  // ingreds.forEach(el => transformIngredients2.push(<Ingredient type={el} />));
-
-  let transformIngredients = ingreds.map((el, i) => <Ingredient key={el + i} type={el} />);
 
   return (
     <AppProvider>
 
       <div className="App" >
 
-        <div className="pizza_building" ref={resultWrapper}>
+        <div className="pizza_building">
           <PizzaImg className="pizza" />
         </div>
 
-        <div className="ingred_dispencer">
-          {transformIngredients}
-        </div>
+        <IngredientDispencer />
 
-        <div className="ingred_adder">
-          <AddIngredient type='tomato' ingreds={ingreds} adder={setIngreds}/>
-          <AddIngredient type='onion' ingreds={ingreds} adder={setIngreds}/>
-          <AddIngredient type='pepper' ingreds={ingreds} adder={setIngreds}/>
-        </div>
-
+        <AddPanel />
 
       </div>
     </AppProvider>
