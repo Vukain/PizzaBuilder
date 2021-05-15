@@ -6,7 +6,7 @@ import AddIngredient from '../AddIngredient/AddIngredient';
 
 const AddPanel = (props) => {
 
-    const { adders, setAdders } = useContext(AppContext);
+    const { adders } = useContext(AppContext);
     const { ingreds, setIngreds } = useContext(AppContext);
 
     let transformAdders = adders['veggies'].map((el, i) => <AddIngredient key={el + i} type={el} ingreds={ingreds} adder={setIngreds} />);

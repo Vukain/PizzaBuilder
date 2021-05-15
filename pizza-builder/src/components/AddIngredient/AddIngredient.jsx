@@ -7,7 +7,6 @@ const AddInredient = (props) => {
 
     const onAddHandler = () => {
         props.adder([...props.ingreds, props.type])
-
     }
 
     return (

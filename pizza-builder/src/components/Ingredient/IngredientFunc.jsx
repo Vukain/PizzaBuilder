@@ -8,15 +8,17 @@ const Ingredient = (props) => {
 
     const [posX, setPosX] = useState(100);
     const [posY, setPosY] = useState(100);
-    const [relX, setRelX] = useState(50);
-    const [relY, setRelY] = useState(50);
+    const [relX, setRelX] = useState(0);
+    const [relY, setRelY] = useState(0);
 
-    const onMouseMoveHandler = useCallback((e, x, y) => {
 
-        console.log(x, y)
+    // problem with frozen status or relX and relY
+    const onMouseMoveHandler = useCallback((e) => {
+
         const { clientX, clientY } = e;
-        setPosX(clientX - x);
-        setPosY(clientY - y);
+        console.log(`clientX: ${clientX} | relX: ${relX} | cX-rX: ${clientX - relX}`)
+        setPosX(clientX - relX);
+        setPosY(clientY - relY);
     }, [])
 
     const onMouseDownHandler = (e) => {
@@ -26,7 +28,7 @@ const Ingredient = (props) => {
         setRelX(clientX - posX);
         setRelY(clientY - posY);
         // console.log(clicked)
-        window.addEventListener('mousemove', (e) => onMouseMoveHandler(e, relX, relY))
+        window.addEventListener('mousemove', onMouseMoveHandler)
     }
 
     const onMouseUpHandler = (e) => {
@@ -36,7 +38,8 @@ const Ingredient = (props) => {
 
     return (
         <div className="ingred_portal" onMouseDown={onMouseDownHandler} onMouseUp={onMouseUpHandler}>
-            <p>{posX}</p>
+            <p>X - {relX}</p>
+            <p>Y - {relY}</p>
             <TomatoImg className='tomato' style={{
                 transform: `translate(${posX}px, ${posY}px)`
             }} />

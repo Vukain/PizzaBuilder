@@ -19,6 +19,7 @@ function App() {
 
         <div className="pizza_building">
           <PizzaImg className="pizza" />
+
         </div>
 
         <IngredientDispencer />
