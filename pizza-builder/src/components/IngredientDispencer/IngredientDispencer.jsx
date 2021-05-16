@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 
+import './IngredientDispencer.sass';
+
 import { AppContext } from '../../AppContext';
 
 import Ingredient from '../Ingredient/Ingredient';
@@ -23,7 +25,13 @@ const AddPanel = (props) => {
 
     return (
         <div className="ingred_dispencer">
-            {transformIngredients}
+            <div className="ingred_dispencer__plate">
+                {transformIngredients}
+            </div>
+
+            <div className="ingred_dispencer__bin">
+            </div>
+
         </div>
     )
 }

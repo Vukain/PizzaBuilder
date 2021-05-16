@@ -3,12 +3,11 @@ import gsap from 'gsap';
 
 import './App.sass';
 
-import { PizzaImg } from './media';
-
 import AppProvider from './AppContext';
 
 import AddPanel from './components/AddPanel/AddPanel';
 import IngredientDispencer from './components/IngredientDispencer/IngredientDispencer';
+import Pizza from './components/PizzaBase/PizzaBase';
 
 function App() {
 
@@ -17,10 +16,7 @@ function App() {
 
       <div className="App" >
 
-        <div className="pizza_building">
-          <PizzaImg className="pizza" />
-
-        </div>
+        <Pizza />
 
         <IngredientDispencer />
 

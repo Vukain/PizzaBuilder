@@ -13,9 +13,11 @@ class Ingredient extends Component {
 
     constructor(props) {
         super(props);
+        this.ingredients = { pepper: [PepperImg, PepperImg2][Math.floor(Math.random() * 2)], tomato: TomatoImg, onion: OnionImg }
+        this.sizes = { small: ['pepper'] }
         this.state = {
-            x: 100, y: 100, relX: 0, relY: 0, scale: 1, rotate: 0, cursor: 'grab',
-            ingredients: { pepper: [PepperImg, PepperImg2][Math.floor(Math.random() * 2)], tomato: TomatoImg, onion: OnionImg }
+            x: 0, y: 0, relX: 0, relY: 0, scale: 1, rotate: 0, cursor: 'grab',
+            ingred: this.ingredients[this.props.type], size: this.sizes['small'].includes(this.props.type) ? 'small' : 'regular'
         }
         this.onMouseMoveHandler = this.onMouseMoveHandler.bind(this);
     }
@@ -60,8 +62,8 @@ class Ingredient extends Component {
 
     render() {
 
-        let Io = this.state.ingredients[this.props.type];
-        const cls = `ingredient ${this.props.type}`;
+        let Io = this.state.ingred;
+        const cls = `ingredient ${this.props.type} ${this.state.size}`;
 
         return (
             <div className={cls} onMouseDown={this.onMouseDownHandler} onMouseUp={this.onMouseUpHandler} style={{
