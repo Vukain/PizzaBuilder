@@ -23,6 +23,7 @@ function App() {
         <AddPanel />
 
       </div>
+      
     </AppProvider>
   );
 }

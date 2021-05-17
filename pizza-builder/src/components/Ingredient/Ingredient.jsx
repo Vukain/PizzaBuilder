@@ -14,7 +14,7 @@ class Ingredient extends Component {
     constructor(props) {
         super(props);
         this.ingredients = { pepper: [PepperImg, PepperImg2][Math.floor(Math.random() * 2)], tomato: TomatoImg, onion: OnionImg }
-        this.sizes = { small: ['pepper'] }
+        this.sizes = { small: ['pepper'] };
         this.state = {
             x: 0, y: 0, relX: 0, relY: 0, scale: 1, rotate: 0, cursor: 'grab',
             ingred: this.ingredients[this.props.type], size: this.sizes['small'].includes(this.props.type) ? 'small' : 'regular'
@@ -55,9 +55,14 @@ class Ingredient extends Component {
     }
 
     onMouseUpHandler = (e) => {
+        const { clientX, clientY } = e;
         this.setState({ scale: 1, cursor: 'grab' })
         window.removeEventListener('mousemove', this.onMouseMoveHandler)
         window.removeEventListener('wheel', this.onScrollHandler);
+        const bin = document.querySelector('.ingred_dispencer__bin');
+        if (clientX < bin.offsetWidth && clientY > document.body.offsetHeight - bin.offsetHeight) {
+            this.props.setIngreds(this.props.ingreds.filter(el => el.id !== this.props.id))
+        }
     }
 
     render() {
