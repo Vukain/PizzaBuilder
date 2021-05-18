@@ -52,12 +52,13 @@ const AppProvider = ({ children }) => {
 
     const [ingreds, setIngreds] = useState([]);
     const [adders, setAdders] = useState({
-        'veggies': ['chilli green', 'chilli red', 'chilli yellow', 'olive black', 'olive green',
-            'onion', 'tomato', 'cocktail tomato', 'shroom dark', 'shroom light'],
-        'meat': ['ham', 'prosciutto', 'salami', 'salami aged'],
         'cheese': ['camembert', 'camembert half', 'feta', 'rokpol blue', 'rokpol gold'],
+        'herbs/fruit': ['basil', 'oregano', 'rucola', 'pineapple'],
+        'meat': ['ham', 'prosciutto', 'salami', 'salami aged'],
         'seafood': ['mussel', 'mussel opened', 'mussel closed', 'octopus', 'shrimp', 'shrimp shell'],
-        'herbs': ['basil', 'oregano', 'rucola']
+        'veggies': ['chilli green', 'chilli red', 'chilli yellow', 'olive black', 'olive green',
+            'onion', 'tomato', 'cocktail tomato', 'shroom dark', 'shroom light',],
+
     });
     const [images, setImages] = useState({
         'basil': [BasilImgA, BasilImgB],
