@@ -1,18 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { AppContext } from '../../AppContext';
 
 import AddIngredient from '../AddIngredient/AddIngredient';
+import Tab from '../Tab/Tab';
+
+import './AddPanel.sass';
 
 const AddPanel = (props) => {
 
     const { adders } = useContext(AppContext);
-
-    let transformAdders = adders['veggies'].map((el, i) => <AddIngredient key={el + i} type={el} />);
+    const [activePanel, setActivePanel] = useState('veggies');
+    const transformAdders = adders[activePanel].map((el, i) => <AddIngredient key={el + i} type={el} />);
+    const transformTabs = Object.keys(adders).map(el => <Tab title={el} active={activePanel} setActive={setActivePanel} />);
 
     return (
         <div className="ingred_adder">
-            {transformAdders}
+            <div className='ingred_adder__tabs'>
+                {transformTabs}
+            </div>
+            <div className='ingred_adder__buttons'>
+                {transformAdders}
+            </div>
+
         </div>);
 }
 

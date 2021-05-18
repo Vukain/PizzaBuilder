@@ -21,35 +21,74 @@ const MusselImgB = React.lazy(() => import('./media/mussel_b.svg'));
 const MusselClosedImg = React.lazy(() => import('./media/mussel_closed.svg'));
 const MusselOpenImgA = React.lazy(() => import('./media/mussel_opened_a.svg'));
 const MusselOpenImgB = React.lazy(() => import('./media/mussel_opened_a.svg'));
-
-
+const OctopusImgA = React.lazy(() => import('./media/octopus_a.svg'));
+const OctopusImgB = React.lazy(() => import('./media/octopus_b.svg'));
+const OliveBlackImgA = React.lazy(() => import('./media/olive_black_sliced.svg'));
+const OliveBlackImgB = React.lazy(() => import('./media/olive_black_whole.svg'));
+const OliveGreenImgA = React.lazy(() => import('./media/olive_green_sliced.svg'));
+const OliveGreenImgB = React.lazy(() => import('./media/olive_green_whole.svg'));
 const OnionImg = React.lazy(() => import('./media/onion.svg'));
-const TomatoImg = React.lazy(() => import('./media/tomato_big.svg'));
+const OreganoImg = React.lazy(() => import('./media/oregano.svg'));
+const PineappleImgA = React.lazy(() => import('./media/pineapple_a.svg'));
+const PineappleImgB = React.lazy(() => import('./media/pineapple_b.svg'));
+const PineappleImgC = React.lazy(() => import('./media/pineapple_c.svg'));
+const ProsciuttoImgA = React.lazy(() => import('./media/prosciutto_a.svg'));
+const ProsciuttoImgB = React.lazy(() => import('./media/prosciutto_b.svg'));
+const RokpolBlueImg = React.lazy(() => import('./media/rokpol_blue.svg'));
+const RokpolGoldImg = React.lazy(() => import('./media/rokpol_gold.svg'));
+const RucolaImgA = React.lazy(() => import('./media/rucola_a.svg'));
+const RucolaImgB = React.lazy(() => import('./media/rucola_b.svg'));
+const RucolaImgC = React.lazy(() => import('./media/rucola_c.svg'));
+const SalamiRedImg = React.lazy(() => import('./media/salami_red.svg'));
+const SalamiAgedImg = React.lazy(() => import('./media/salami_aged.svg'));
+const ShrimpImg = React.lazy(() => import('./media/shrimp.svg'));
+const ShrimpShellImg = React.lazy(() => import('./media/shrimp_shell.svg'));
+const ShroomLightImg = React.lazy(() => import('./media/shroom_light.svg'));
+const ShroomDarkImg = React.lazy(() => import('./media/shroom_dark.svg'));
+const TomatoBigImg = React.lazy(() => import('./media/tomato_big.svg'));
+const TomatoSmallImg = React.lazy(() => import('./media/tomato_small.svg'));
 
 const AppProvider = ({ children }) => {
 
     const [ingreds, setIngreds] = useState([]);
     const [adders, setAdders] = useState({
-        'veggies': ['chili green', 'chilli red', 'chili yellow', 'onion', 'tomato'],
-        'meat': ['ham'],
-        'cheese': ['camembert', 'camembert half', 'feta'],
-        'seafood': ['mussel', 'mussel opened', 'mussel closed'],
-        'herbs': ['basil']
+        'veggies': ['chilli green', 'chilli red', 'chilli yellow', 'olive black', 'olive green',
+            'onion', 'tomato', 'cocktail tomato', 'shroom dark', 'shroom light'],
+        'meat': ['ham', 'prosciutto', 'salami', 'salami aged'],
+        'cheese': ['camembert', 'camembert half', 'feta', 'rokpol blue', 'rokpol gold'],
+        'seafood': ['mussel', 'mussel opened', 'mussel closed', 'octopus', 'shrimp', 'shrimp shell'],
+        'herbs': ['basil', 'oregano', 'rucola']
     });
     const [images, setImages] = useState({
         'basil': [BasilImgA, BasilImgB],
         'camembert': CamembertImg,
         'camembert half': CamembertHalfImg,
-        'chili green': [ChilliGreenImgA, ChilliGreenImgB],
+        'chilli green': [ChilliGreenImgA, ChilliGreenImgB],
         'chilli red': [ChilliRedImgA, ChilliRedImgB],
-        'chili yellow': [ChilliYellowImgA, ChilliYellowImgB],
+        'chilli yellow': [ChilliYellowImgA, ChilliYellowImgB],
         'feta': [FetaImgA, FetaImgB],
         'ham': [HamImgA, HamImgB],
         'mussel': [MusselImgA, MusselImgB],
         'mussel opened': [MusselOpenImgA, MusselOpenImgB],
         'mussel closed': MusselClosedImg,
-        tomato: TomatoImg,
-        onion: OnionImg
+        'octopus': [OctopusImgA, OctopusImgB],
+        'olive black': [OliveBlackImgA, OliveBlackImgB],
+        'olive green': [OliveGreenImgA, OliveGreenImgB],
+        'onion': OnionImg,
+        'oregano': OreganoImg,
+        'pineapple': [PineappleImgA, PineappleImgB, PineappleImgC],
+        'prosciutto': [ProsciuttoImgA, ProsciuttoImgB],
+        'rokpol blue': RokpolBlueImg,
+        'rokpol gold': RokpolGoldImg,
+        'rucola': [RucolaImgA, RucolaImgB, RucolaImgC],
+        'salami': SalamiRedImg,
+        'salami aged': SalamiAgedImg,
+        'shrimp': ShrimpImg,
+        'shrimp shell': ShrimpShellImg,
+        'shroom dark': ShroomDarkImg,
+        'shroom light': ShroomLightImg,
+        'tomato': TomatoBigImg,
+        'cocktail tomato': TomatoSmallImg,
     })
 
     return (
