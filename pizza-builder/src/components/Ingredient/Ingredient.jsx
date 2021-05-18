@@ -4,20 +4,18 @@ import React, { Component, Suspense } from 'react';
 
 import './Ingredient.sass';
 
-const OnionImg = React.lazy(() => import('../../media/onion.svg'));
-const TomatoImg = React.lazy(() => import('../../media/tomato.svg'));
-const PepperImg = React.lazy(() => import('../../media/pepper.svg'));
-const PepperImg2 = React.lazy(() => import('../../media/pepper2.svg'));
 
 class Ingredient extends Component {
 
     constructor(props) {
         super(props);
-        this.ingredients = { pepper: [PepperImg, PepperImg2][Math.floor(Math.random() * 2)], tomato: TomatoImg, onion: OnionImg }
-        this.sizes = { small: ['pepper'] };
+
+        this.sizes = { small: ['chili red'] };
+
         this.state = {
             x: 0, y: 0, relX: 0, relY: 0, scale: 1, rotate: 0, cursor: 'grab',
-            ingred: this.ingredients[this.props.type], size: this.sizes['small'].includes(this.props.type) ? 'small' : 'regular'
+            ingred: this.props.imag[this.props.type].length === undefined ? this.props.imag[this.props.type] : this.props.imag[this.props.type][Math.floor(Math.random() * this.props.imag[this.props.type].length)],
+            size: this.sizes['small'].includes(this.props.type) ? 'small' : 'regular'
         }
         this.onMouseMoveHandler = this.onMouseMoveHandler.bind(this);
     }

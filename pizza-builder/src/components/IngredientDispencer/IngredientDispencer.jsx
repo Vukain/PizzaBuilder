@@ -9,7 +9,7 @@ import Ingredient from '../Ingredient/Ingredient';
 const AddPanel = (props) => {
 
     const { ingreds, setIngreds } = useContext(AppContext);
-
+    const { images, setImages } = useContext(AppContext);
     // let transformIngredients = Object.keys(ingreds)
     // .map(igKey => {
     //     return [...Array(ingreds[igKey])]
@@ -21,7 +21,7 @@ const AddPanel = (props) => {
     // const transformIngredients = [];
     // ingreds.forEach(el => transformIngredients2.push(<Ingredient type={el} />));
 
-    let transformIngredients = ingreds.map((el, i) => <Ingredient key={el['id']} type={el['type']} ingreds={ingreds} setIngreds={setIngreds} id={el['id']} />);
+    let transformIngredients = ingreds.map((el, i) => <Ingredient key={el['id']} type={el['type']} ingreds={ingreds} setIngreds={setIngreds} id={el['id']} imag={images} />);
 
     return (
         <div className="ingred_dispencer">

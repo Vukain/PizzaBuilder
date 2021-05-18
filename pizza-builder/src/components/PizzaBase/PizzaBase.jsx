@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PizzaImg } from '../../media';
+import PizzaImg from '../../media/pizza_base.svg';
 
 import './PizzaBase.sass';
 
