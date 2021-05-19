@@ -49,6 +49,7 @@ class Ingredient extends Component {
         this.setState({ relX: clientX - this.state.x, relY: clientY - this.state.y, scale: 1.2, cursor: 'grabbing' })
         window.addEventListener('mousemove', this.onMouseMoveHandler);
         window.addEventListener('wheel', this.onScrollHandler);
+        window.addEventListener('mouseup', this.onMouseUpHandler);
     }
 
     onMouseUpHandler = (e) => {
@@ -56,11 +57,12 @@ class Ingredient extends Component {
         this.setState({ scale: 1, cursor: 'grab' })
         window.removeEventListener('mousemove', this.onMouseMoveHandler)
         window.removeEventListener('wheel', this.onScrollHandler);
+        window.removeEventListener('mouseup', this.onMouseUpHandler);
         const bin = document.querySelector('.ingred_dispencer__bin');
         if (clientX < bin.offsetWidth && clientY > document.body.offsetHeight - bin.offsetHeight) {
             const tl = gsap.timeline({ onComplete: () => { this.props.setIngreds(this.props.ingreds.filter(el => el.id !== this.props.id)) } });
             const item = document.getElementById(this.props.id);
-            tl.to(item, { duration: 1.2, scale: .3, transform: 'rotateZ(120deg)' });
+            tl.to(item, { duration: 1, scale: .2, opacity: 0.7, transform: 'rotateZ(120deg)' });
             // this.props.setIngreds(this.props.ingreds.filter(el => el.id !== this.props.id))
         }
     }
@@ -68,18 +70,18 @@ class Ingredient extends Component {
     render() {
 
         let Io = this.state.ingred;
-        const cls = `ingredient ${this.props.type} ${this.state.size}`;
+        const cls = `ingredient ingredient--${this.props.type.replace(' ', '_')} ${this.state.size}`;
 
         return (
-            <div className={cls} id={this.props.id} onMouseDown={this.onMouseDownHandler} onMouseUp={this.onMouseUpHandler} style={{
+            <div className={cls} id={this.props.id} onMouseDown={this.onMouseDownHandler} style={{
                 top: `${this.state.y}px`,
                 left: `${this.state.x}px`,
-                transform: `scale(${this.state.scale})`,
+                transform: `scale(${this.state.scale}) rotateZ(${this.state.rotate}deg)`,
                 cursor: `${this.state.cursor}`,
             }}>
 
                 <Suspense fallback={<div></div>}>
-                    < Io style={{ transform: `rotateZ(${this.state.rotate}deg)` }} />
+                    < Io style={{ transform: `` }} />
                 </Suspense>
 
             </div>);

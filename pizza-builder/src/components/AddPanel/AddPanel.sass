@@ -5,27 +5,34 @@
     overflow: visible
 
     &__tabs
-        flex-grow: 1
+        flex-grow: 0.6
         display: flex
         flex-direction: column
         background-color: unset
-        justify-content: space-around
+        justify-content: space-between
+        z-index: 1
+
     &__tab
         cursor: pointer
         padding-right: 10px
         line-height: 0.5
         border-radius: 10px 0 0 10px
+        z-index: 2
         margin: 0
-        height: 18vh
+        height: 16vh
         font-size: 4vh
         writing-mode: vertical-rl
         text-orientation: mixed
         background-color: #ccc
+        transform: scale(1.1)
+
         &--active
             background-color: #fff
-            
+            transition: transform .3s
+            transform: scale(1.2)
 
     &__buttons
         width: 8vw
         flex-grow: 8
         background-color: #fff
+        z-index: 3
