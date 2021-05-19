@@ -57,9 +57,9 @@ const AppProvider = ({ children }) => {
         'meat': ['ham', 'prosciutto', 'salami', 'salami aged'],
         'seafood': ['mussel', 'mussel opened', 'mussel closed', 'octopus', 'shrimp', 'shrimp shell'],
         'veggies': ['chilli green', 'chilli red', 'chilli yellow', 'olive black', 'olive green',
-            'onion', 'tomato', 'cocktail tomato', 'shroom dark', 'shroom light',],
-
+            'onion', 'tomato', 'cocktail tomato', 'shroom dark', 'shroom light']
     });
+
     const [images, setImages] = useState({
         'basil': [BasilImgA, BasilImgB],
         'camembert': CamembertImg,
@@ -90,10 +90,10 @@ const AppProvider = ({ children }) => {
         'shroom light': ShroomLightImg,
         'tomato': TomatoBigImg,
         'cocktail tomato': TomatoSmallImg,
-    })
+    });
 
     return (
-        <AppContext.Provider value={{ ingreds, setIngreds, adders, setAdders, images, setImages }} >
+        <AppContext.Provider value={{ ingreds, setIngreds, adders, setAdders, images, setImages }}>
             {children}
         </AppContext.Provider>
     );

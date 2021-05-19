@@ -17,9 +17,7 @@ function App() {
       <div className="App" >
 
         <Pizza />
-
         <IngredientDispencer />
-
         <AddPanel />
 
       </div>

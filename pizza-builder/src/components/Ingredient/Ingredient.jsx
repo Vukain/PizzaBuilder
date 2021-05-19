@@ -1,22 +1,21 @@
 import React, { Component, Suspense } from 'react';
-
-// import { TomatoImg, OnionImgss } from '../../media';
+import gsap from 'gsap';
 
 import './Ingredient.sass';
-
 
 class Ingredient extends Component {
 
     constructor(props) {
         super(props);
-
+        this.vertical = ['prosciutto', 'ham', 'camembert'];
         this.sizes = { small: ['chili red'] };
-
+        this.ingred = this.props.imag[this.props.type];
+        this.rotate = window.matchMedia('(orientation: landscape)').matches && this.vertical.includes(this.props.type) ? 90 : 0;
         this.state = {
-            x: 0, y: 0, relX: 0, relY: 0, scale: 1, rotate: 0, cursor: 'grab',
-            ingred: this.props.imag[this.props.type].length === undefined ? this.props.imag[this.props.type] : this.props.imag[this.props.type][Math.floor(Math.random() * this.props.imag[this.props.type].length)],
+            x: 0, y: 0, relX: 0, relY: 0, scale: 1, rotate: this.rotate, cursor: 'grab',
+            ingred: this.ingred.length === undefined ? this.ingred : this.ingred[Math.floor(Math.random() * this.ingred.length)],
             size: this.sizes['small'].includes(this.props.type) ? 'small' : 'regular'
-        }
+        };
         this.onMouseMoveHandler = this.onMouseMoveHandler.bind(this);
     }
 
@@ -33,7 +32,7 @@ class Ingredient extends Component {
 
     onMouseMoveHandler = (e) => {
         const { clientX, clientY } = e;
-        this.setState((prevState) => ({ x: clientX - prevState.relX, y: clientY - prevState.relY }))
+        this.setState((prevState) => ({ x: clientX - prevState.relX, y: clientY - prevState.relY }));
     }
 
     onScrollHandler = (e) => {
@@ -42,7 +41,7 @@ class Ingredient extends Component {
             this.setState(prevState => ({ rotate: prevState.rotate + 5 }))
         } else {
             this.setState(prevState => ({ rotate: prevState.rotate - 5 }))
-        }
+        };
     }
 
     onMouseDownHandler = (e) => {
@@ -59,7 +58,10 @@ class Ingredient extends Component {
         window.removeEventListener('wheel', this.onScrollHandler);
         const bin = document.querySelector('.ingred_dispencer__bin');
         if (clientX < bin.offsetWidth && clientY > document.body.offsetHeight - bin.offsetHeight) {
-            this.props.setIngreds(this.props.ingreds.filter(el => el.id !== this.props.id))
+            const tl = gsap.timeline({ onComplete: () => { this.props.setIngreds(this.props.ingreds.filter(el => el.id !== this.props.id)) } });
+            const item = document.getElementById(this.props.id);
+            tl.to(item, { duration: 1.2, scale: .3, transform: 'rotateZ(120deg)' });
+            // this.props.setIngreds(this.props.ingreds.filter(el => el.id !== this.props.id))
         }
     }
 
@@ -69,7 +71,7 @@ class Ingredient extends Component {
         const cls = `ingredient ${this.props.type} ${this.state.size}`;
 
         return (
-            <div className={cls} onMouseDown={this.onMouseDownHandler} onMouseUp={this.onMouseUpHandler} style={{
+            <div className={cls} id={this.props.id} onMouseDown={this.onMouseDownHandler} onMouseUp={this.onMouseUpHandler} style={{
                 top: `${this.state.y}px`,
                 left: `${this.state.x}px`,
                 transform: `scale(${this.state.scale})`,

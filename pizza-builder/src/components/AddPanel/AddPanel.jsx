@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 
+import './AddPanel.sass';
+
 import { AppContext } from '../../AppContext';
 
 import AddIngredient from '../AddIngredient/AddIngredient';
 import Tab from '../Tab/Tab';
-
-import './AddPanel.sass';
 
 const AddPanel = (props) => {
 
