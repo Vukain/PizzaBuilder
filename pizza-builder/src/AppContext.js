@@ -20,7 +20,7 @@ const MusselImgA = React.lazy(() => import('./media/mussel_a.svg'));
 const MusselImgB = React.lazy(() => import('./media/mussel_b.svg'));
 const MusselClosedImg = React.lazy(() => import('./media/mussel_closed.svg'));
 const MusselOpenImgA = React.lazy(() => import('./media/mussel_opened_a.svg'));
-const MusselOpenImgB = React.lazy(() => import('./media/mussel_opened_a.svg'));
+const MusselOpenImgB = React.lazy(() => import('./media/mussel_opened_b.svg'));
 const OctopusImgA = React.lazy(() => import('./media/octopus_a.svg'));
 const OctopusImgB = React.lazy(() => import('./media/octopus_b.svg'));
 const OliveBlackImgA = React.lazy(() => import('./media/olive_black_sliced.svg'));
