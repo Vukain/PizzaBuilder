@@ -17,7 +17,7 @@ class Ingredient extends Component {
             size: this.sizes['small'].includes(this.props.type) ? 'small' : 'regular'
         };
         this.onMouseMoveHandler = this.onMouseMoveHandler.bind(this);
-    }
+    };
 
     // UNSAFE_componentWillMount() {
     //     const ingred = this.state.ingredients[this.props.type]
@@ -33,7 +33,7 @@ class Ingredient extends Component {
     onMouseMoveHandler = (e) => {
         const { clientX, clientY } = e;
         this.setState((prevState) => ({ x: clientX - prevState.relX, y: clientY - prevState.relY }));
-    }
+    };
 
     onScrollHandler = (e) => {
         const { deltaY } = e;
@@ -42,7 +42,7 @@ class Ingredient extends Component {
         } else {
             this.setState(prevState => ({ rotate: prevState.rotate - 5 }))
         };
-    }
+    };
 
     onMouseDownHandler = (e) => {
         const { clientX, clientY } = e;
@@ -50,12 +50,12 @@ class Ingredient extends Component {
         window.addEventListener('mousemove', this.onMouseMoveHandler);
         window.addEventListener('wheel', this.onScrollHandler);
         window.addEventListener('mouseup', this.onMouseUpHandler);
-    }
+    };
 
     onMouseUpHandler = (e) => {
         const { clientX, clientY } = e;
-        this.setState({ scale: 1, cursor: 'grab' })
-        window.removeEventListener('mousemove', this.onMouseMoveHandler)
+        this.setState({ scale: 1, cursor: 'grab' });
+        window.removeEventListener('mousemove', this.onMouseMoveHandler);
         window.removeEventListener('wheel', this.onScrollHandler);
         window.removeEventListener('mouseup', this.onMouseUpHandler);
         const bin = document.querySelector('.ingred_dispencer__bin');
@@ -63,14 +63,13 @@ class Ingredient extends Component {
             const tl = gsap.timeline({ onComplete: () => { this.props.setIngreds(this.props.ingreds.filter(el => el.id !== this.props.id)) } });
             const item = document.getElementById(this.props.id);
             tl.to(item, { duration: 1, scale: .2, opacity: 0.7, transform: 'rotateZ(120deg)' });
-            // this.props.setIngreds(this.props.ingreds.filter(el => el.id !== this.props.id))
-        }
-    }
+        };
+    };
 
     render() {
 
         let Io = this.state.ingred;
-        const cls = `ingredient ingredient--${this.props.type.replace(' ', '_')} ${this.state.size}`;
+        const cls = `ingredient ingredient--${this.props.type.replace(' ', '_')}`;
 
         return (
             <div className={cls} id={this.props.id} onMouseDown={this.onMouseDownHandler} style={{
@@ -81,7 +80,7 @@ class Ingredient extends Component {
             }}>
 
                 <Suspense fallback={<div></div>}>
-                    < Io style={{ transform: `` }} />
+                    < Io />
                 </Suspense>
 
             </div>);
