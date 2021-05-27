@@ -7,14 +7,13 @@ class Ingredient extends Component {
 
     constructor(props) {
         super(props);
-        this.vertical = ['prosciutto', 'ham', 'camembert'];
-        this.sizes = { small: ['chili red'] };
+        this.vertical = ['camembert half'];
+        this.verticalCounter = ['prosciutto', 'ham', 'camembert'];
         this.ingred = this.props.imag[this.props.type];
-        this.rotate = window.matchMedia('(orientation: landscape)').matches && this.vertical.includes(this.props.type) ? 90 : 0;
+        this.rotate = window.matchMedia('(orientation: landscape)').matches ? this.vertical.includes(this.props.type) ? 90 : this.verticalCounter.includes(this.props.type) ? -90 : 0 : 0;
         this.state = {
             x: 0, y: 0, relX: 0, relY: 0, scale: 1, rotate: this.rotate, cursor: 'grab',
-            ingred: this.ingred.length === undefined ? this.ingred : this.ingred[Math.floor(Math.random() * this.ingred.length)],
-            size: this.sizes['small'].includes(this.props.type) ? 'small' : 'regular'
+            ingred: this.ingred.length === undefined ? this.ingred : this.ingred[Math.floor(Math.random() * this.ingred.length)]
         };
         this.onMouseMoveHandler = this.onMouseMoveHandler.bind(this);
     };
@@ -84,8 +83,7 @@ class Ingredient extends Component {
                 </Suspense>
 
             </div>);
-    }
-}
+    };
+};
 
 export default Ingredient;
-
