@@ -7,8 +7,8 @@ class Ingredient extends Component {
 
     constructor(props) {
         super(props);
-        this.vertical = ['camembert half'];
-        this.verticalCounter = ['prosciutto', 'ham', 'camembert'];
+        this.vertical = ['camembert half', 'basil', 'octopus'];
+        this.verticalCounter = ['prosciutto', 'ham', 'camembert', 'rucola', 'mussel opened', 'mussel closed', 'shrimp shell'];
         this.ingred = this.props.imag[this.props.type];
         this.rotate = window.matchMedia('(orientation: landscape)').matches ? this.vertical.includes(this.props.type) ? 90 : this.verticalCounter.includes(this.props.type) ? -90 : 0 : 0;
         this.state = {
