@@ -13,7 +13,7 @@ class Ingredient extends Component {
         this.ingred = this.props.imag[this.props.type];
         this.rotate = window.matchMedia('(orientation: landscape)').matches ? this.vertical.includes(this.props.type) ? 90 : this.verticalCounter.includes(this.props.type) ? -90 : 0 : 0;
         this.state = {
-            x: 0, y: 0, relX: 0, relY: 0, scale: 1, touchRotate: false, rotate: this.rotate, cursor: 'grab',
+            x: 0, y: 0, relX: 0, relY: 0, scale: 1, touchRotate: false, touchInitialRotate: 0, rotate: this.rotate, cursor: 'grab',
             ingred: this.ingred.length === undefined ? this.ingred : this.ingred[Math.floor(Math.random() * this.ingred.length)]
         };
         this.onMouseMoveHandler = this.onMouseMoveHandler.bind(this);
@@ -78,7 +78,7 @@ class Ingredient extends Component {
     onTouchDownHandler = (e) => {
         const clientX = e.touches[0].clientX;
         const clientY = e.touches[0].clientY;
-        this.setState({ relX: clientX - this.state.x, relY: clientY - this.state.y, scale: 1.2, cursor: 'grabbing' })
+        this.setState({ relX: clientX - this.state.x, relY: clientY - this.state.y, scale: 1.2, cursor: 'grabbing', touchInitialRotate: this.state.rotate })
         window.addEventListener('touchmove', this.onTouchMoveHandler);
         window.addEventListener('touchend', this.onTouchUpHandler);
     };
@@ -88,7 +88,7 @@ class Ingredient extends Component {
         const clientY = e.changedTouches[0].clientY;
         this.setState({ scale: 1, cursor: 'grab', touchRotate: false });
         window.removeEventListener('touchmove', this.onTouchMoveHandler);
-        window.removeEventListener('touchup', this.onTouchUpHandler);
+        window.removeEventListener('touchend', this.onTouchUpHandler);
         const bin = document.querySelector('.ingred_dispencer__bin');
         if (clientX < bin.offsetWidth && clientY > document.body.offsetHeight - bin.offsetHeight) {
             const tl = gsap.timeline({ onComplete: () => { this.props.setIngreds(this.props.ingreds.filter(el => el.id !== this.props.id)) } });
