@@ -1,4 +1,5 @@
 import React, { Component, Suspense } from 'react';
+import Hammer from 'react-hammerjs';
 import gsap from 'gsap';
 
 import './Ingredient.sass';
@@ -12,7 +13,7 @@ class Ingredient extends Component {
         this.ingred = this.props.imag[this.props.type];
         this.rotate = window.matchMedia('(orientation: landscape)').matches ? this.vertical.includes(this.props.type) ? 90 : this.verticalCounter.includes(this.props.type) ? -90 : 0 : 0;
         this.state = {
-            x: 0, y: 0, relX: 0, relY: 0, scale: 1, rotate: this.rotate, cursor: 'grab',
+            x: 0, y: 0, relX: 0, relY: 0, scale: 1, touchRotate: false, rotate: this.rotate, cursor: 'grab',
             ingred: this.ingred.length === undefined ? this.ingred : this.ingred[Math.floor(Math.random() * this.ingred.length)]
         };
         this.onMouseMoveHandler = this.onMouseMoveHandler.bind(this);
@@ -65,24 +66,66 @@ class Ingredient extends Component {
         };
     };
 
+    onTouchMoveHandler = (e) => {
+        console.log(this.state.touchRotate)
+        if (!this.state.touchRotate) {
+            const clientX = e.touches[0].clientX;
+            const clientY = e.touches[0].clientY;
+            this.setState((prevState) => ({ x: clientX - prevState.relX, y: clientY - prevState.relY }));
+        }
+    };
+
+    onTouchDownHandler = (e) => {
+        const clientX = e.touches[0].clientX;
+        const clientY = e.touches[0].clientY;
+        this.setState({ relX: clientX - this.state.x, relY: clientY - this.state.y, scale: 1.2, cursor: 'grabbing' })
+        window.addEventListener('touchmove', this.onTouchMoveHandler);
+        window.addEventListener('touchend', this.onTouchUpHandler);
+    };
+
+    onTouchUpHandler = (e) => {
+        const clientX = e.changedTouches[0].clientX;
+        const clientY = e.changedTouches[0].clientY;
+        this.setState({ scale: 1, cursor: 'grab', touchRotate: false });
+        window.removeEventListener('touchmove', this.onTouchMoveHandler);
+        window.removeEventListener('touchup', this.onTouchUpHandler);
+        const bin = document.querySelector('.ingred_dispencer__bin');
+        if (clientX < bin.offsetWidth && clientY > document.body.offsetHeight - bin.offsetHeight) {
+            const tl = gsap.timeline({ onComplete: () => { this.props.setIngreds(this.props.ingreds.filter(el => el.id !== this.props.id)) } });
+            const item = document.getElementById(this.props.id);
+            tl.to(item, { duration: 1, scale: .2, opacity: 0.7, transform: 'rotateZ(120deg)' });
+        };
+    };
+
+    onRotationHandler = (e) => {
+        this.setState({ rotate: Math.round(e.rotation), touchRotate: true })
+    };
+
     render() {
 
         let Io = this.state.ingred;
         const cls = `ingredient ingredient--${this.props.type.replace(' ', '_')}`;
 
         return (
-            <div className={cls} id={this.props.id} onMouseDown={this.onMouseDownHandler} style={{
-                top: `${this.state.y}px`,
-                left: `${this.state.x}px`,
-                transform: `scale(${this.state.scale}) rotateZ(${this.state.rotate}deg)`,
-                cursor: `${this.state.cursor}`,
-            }}>
+            <Hammer options={{
+                recognizers: {
+                    rotate: { enable: true }
+                }
+            }}
+                onRotate={this.onRotationHandler}>
+                <div className={cls} id={this.props.id} onTouchStart={this.onTouchDownHandler} onMouseDown={this.onMouseDownHandler} style={{
+                    top: `${this.state.y}px`,
+                    left: `${this.state.x}px`,
+                    transform: `scale(${this.state.scale}) rotateZ(${this.state.rotate}deg)`,
+                    cursor: `${this.state.cursor}`,
+                }}>
 
-                <Suspense fallback={<div></div>}>
-                    < Io />
-                </Suspense>
+                    <Suspense fallback={<div></div>}>
+                        < Io />
+                    </Suspense>
 
-            </div>);
+                </div>
+            </Hammer>);
     };
 };
 
