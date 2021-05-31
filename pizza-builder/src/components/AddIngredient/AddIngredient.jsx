@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
 
-import Ingredient from '../Ingredient/Ingredient';
-
 import { AppContext } from '../../AppContext';
 
 import './AddIngredient.sass';
