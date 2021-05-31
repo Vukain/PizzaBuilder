@@ -1,7 +1,6 @@
 .ingred_add__button
     display: inline-block
-    width: 80%
-    margin: 10px auto
+    margin: 10px
     padding: 0.1vh 0.2vh
     font-size: 4vh
     text-align: center
@@ -11,6 +10,9 @@
     border-radius: 20px
     cursor: pointer
     transition: .3s
+    @media(orientation: portrait)
+        padding: 0.1vw 0.2vw
+        font-size: 4vw
 
     &:hover
         color: #fff

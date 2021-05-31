@@ -1,8 +1,10 @@
 .ingred_adder
-    width: 9vw
+    flex-basis: 9vw
     display: flex
     flex-grow: 2
     overflow: visible
+    @media(orientation: portrait)
+        flex-direction: column
 
     &__tabs
         flex-grow: 0.6
@@ -11,6 +13,8 @@
         background-color: unset
         justify-content: space-between
         z-index: 1
+        @media(orientation: portrait)
+            flex-direction: row
 
     &__tab
         cursor: pointer
@@ -25,6 +29,9 @@
         text-orientation: mixed
         background-color: #ccc
         transform: scale(1.1)
+        @media(orientation: portrait)
+            height: 4vw
+            writing-mode: unset
 
         &--active
             background-color: #fff
@@ -32,7 +39,14 @@
             transform: scale(1.2)
 
     &__buttons
-        width: 8vw
-        flex-grow: 8
+        display: flex
+        flex-direction: column
+        justify-content: center
+        flex-basis: 8vw
         background-color: #fff
         z-index: 3
+        @media(orientation: portrait)
+            flex-direction: row
+            flex-wrap: wrap
+            align-items: flex-start
+            height: 50vw
