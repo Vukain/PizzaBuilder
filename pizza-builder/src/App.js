@@ -19,7 +19,6 @@ function App() {
         <Pizza />
         <IngredientDispencer />
         <AddPanel />
-
       </div>
       
     </AppProvider>
