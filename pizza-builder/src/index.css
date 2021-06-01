@@ -2,6 +2,7 @@ html,
 body {
   height: 100%;
   width: 100%;
+  background-color: #3dbacc;
   overflow: hidden;
   font-family: 'Amatic SC', cursive;
   font-weight: 700;
@@ -11,11 +12,6 @@ body {
 #root {
   height: 100%;
   width: 100%;
-}
-
-body {
-  background-color: #3dbacc;
-  overflow: hidden;
 }
 
 svg {

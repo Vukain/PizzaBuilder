@@ -90,7 +90,12 @@ class Ingredient extends Component {
         window.removeEventListener('touchmove', this.onTouchMoveHandler);
         window.removeEventListener('touchend', this.onTouchUpHandler);
         const bin = document.querySelector('.ingred_dispencer__bin');
-        if (clientX < bin.offsetWidth && clientY > document.body.offsetHeight - bin.offsetHeight) {
+
+        const binPositionCheck = window.matchMedia('(orientation: landscape)').matches ?
+            clientX < bin.offsetWidth && clientY > document.body.offsetHeight - bin.offsetHeight :
+            clientX < bin.offsetWidth && clientY < bin.offsetHeight;
+
+        if (binPositionCheck) {
             const tl = gsap.timeline({ onComplete: () => { this.props.setIngreds(this.props.ingreds.filter(el => el.id !== this.props.id)) } });
             const item = document.getElementById(this.props.id);
             tl.to(item, { duration: 1, scale: .2, opacity: 0.7, transform: 'rotateZ(120deg)' });

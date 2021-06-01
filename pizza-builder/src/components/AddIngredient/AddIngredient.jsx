@@ -2,8 +2,6 @@ import React, { useContext } from 'react';
 
 import { AppContext } from '../../AppContext';
 
-import './AddIngredient.sass';
-
 const AddInredient = (props) => {
 
     const { ingreds, setIngreds } = useContext(AppContext);
@@ -13,7 +11,7 @@ const AddInredient = (props) => {
     }
 
     return (
-        <button className='ingred_add__button' onClick={onAddHandler}>Add {props.type}</button>);
+        <button className='ingred_adder__button' onClick={onAddHandler}>Add {props.type}</button>);
 }
 
 export default AddInredient;
