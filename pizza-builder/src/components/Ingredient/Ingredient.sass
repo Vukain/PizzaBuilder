@@ -1,90 +1,64 @@
 .ingredient
+    --jed: 1vh
     position: absolute
-    width: 18vh
-    height: 18vh
-
-    margin-top: 11vh
-    margin-left: 5vh
+    width: calc(18 * var(--jed))
+    height: calc(18 * var(--jed))
     transition: transform .1s
+    @media (orientation: portrait)
+        --jed: 1vw
 
     &--chilli_red, &--chilli_yellow, &--chilli_green, &--feta
-        width: 6vh
-        height: 6vh
-        margin-left: 7vh
-        margin-top: 17vh
+        width: calc(6 * var(--jed))
+        height: calc(6 * var(--jed))
 
     &--ham, &--prosciutto
-        width: 28vh
-        height: 12vh
-        margin-top: 14vh
+        width: calc(28 * var(--jed))
+        height: calc(12 * var(--jed))
 
     &--salami
-        width: 14vh
-        height: 14vh
-        margin-top: 13vh
+        width: calc(14 * var(--jed))
+        height: calc(14 * var(--jed))
 
     &--olive_green, &--olive_black
-        width: 6vh
-        height: 10vh
-        margin-left: 7vh
-        margin-top: 15vh
+        width: calc(6 * var(--jed))
+        height: calc(10 * var(--jed))
 
     &--cocktail_tomato, &--shrimp
-        width: 12vh
-        height: 12vh
-        margin-left: 4vh
-        margin-top: 14vh
+        width: calc(12 * var(--jed))
+        height: calc(12 * var(--jed))
 
     &--pineapple, &--mussel
-        width: 8vh
-        height: 8vh
-        margin-left: 6vh
-        margin-top: 16vh
+        width: calc(8 * var(--jed))
+        height: calc(8 * var(--jed))
 
     &--shrimp_shell
-        width: 24vh
-        height: 14vh
-        margin-left: -2vh
-        margin-top: 13vh
+        width: calc(24 * var(--jed))
+        height: calc(14 * var(--jed))
 
     &--shroom_dark, &--shroom_light
-        width: 16vh
-        height: 12vh
-        margin-left: 2vh
-        margin-top: 14vh
+        width: calc(16 * var(--jed))
+        height: calc(12 * var(--jed))
 
     &--camembert, &--mussel_opened, &--mussel_closed, &--octopus
-        width: 20vh
-        height: 8vh
-        margin-left: 0
-        margin-top: 16vh
+        width: calc(20 * var(--jed))
+        height: calc(8 * var(--jed))
 
     &--mussel_opened, &--mussel_closed
-        width: 22vh
-        height: 14vh
-        margin-left: -1vh
-        margin-top: 13vh
+        width: calc(22 * var(--jed))
+        height: calc(14 * var(--jed))
 
     &--camembert_half
-        width: 12vh
-        height: 8vh
-        margin-left: 4vh
-        margin-top: 16vh
+        width: calc(12 * var(--jed))
+        height: calc(8 * var(--jed))
 
     &--rokpol_blue, &--rokpol_gold
-        width: 18vh
-        height: 14vh
-        margin-left: 1vh
-        margin-top: 13vh
+        width: calc(18 * var(--jed))
+        height: calc(14 * var(--jed))
 
     &--rucola
-        width: 28vh
-        height: 16vh
-        margin-left: -4vh
-        margin-top: 12vh
+        width: calc(28 * var(--jed))
+        height: calc(16 * var(--jed))
 
     &--basil
-        width: 16vh
-        height: 8vh
-        margin-left: 2vh
-        margin-top: 16vh
+        width: calc(16 * var(--jed))
+        height: calc(8 * var(--jed))
