@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import Hammer from 'react-hammerjs';
 
 import './AddPanel.sass';
 

@@ -1,21 +1,27 @@
 .ingred_dispencer
     position: relative
-    flex-basis: 20vh
+    z-index: 3
     display: flex
+    flex-basis: 10vw
+    flex-shrink: 0
     flex-direction: column
+    flex-grow: 0
     justify-content: space-between
     order: -1
     overflow: visible
-    z-index: 3
+
     @media (orientation: portrait)
         flex-direction: row
-        flex-basis: 20vw
-
+        flex-basis: 10vh
 
     &__plate
         background-color: #fff
         flex-basis: 40vh
+        @media (orientation: portrait)
+            flex-basis: 40vw
 
     &__bin
         background-color: #2e2d2d
         flex-basis: 40vh
+        @media (orientation: portrait)
+            flex-basis: 40vw

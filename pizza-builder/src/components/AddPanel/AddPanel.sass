@@ -1,14 +1,15 @@
 .ingred_adder
-    flex-basis: 9vw
-    display: flex
-    flex-grow: 2
-    overflow: visible
     z-index: 2
+    display: flex
+    flex-basis: 20vw
+    flex-grow: 0
+    overflow: visible
     @media(orientation: portrait)
         flex-direction: column
+        flex-basis: 20vh
 
     &__tabs
-        flex-grow: 0.6
+        width: 5vh
         display: flex
         flex-direction: column
         background-color: unset
@@ -16,23 +17,27 @@
         z-index: 1
         @media(orientation: portrait)
             flex-direction: row
+            width: unset
+            height: 5vw
 
     &__tab
-        cursor: pointer
-        padding-right: 10px
-        line-height: 0.5
-        border-radius: 10px 0 0 10px
+        background-color: #ccc
+        border-radius: 1vh 0 0 1vh
         z-index: 2
-        margin: 0
         height: 16vh
         font-size: 4vh
+        line-height: 5vh
         writing-mode: vertical-rl
         text-orientation: mixed
-        background-color: #ccc
+        cursor: pointer
         transform: scale(1.1)
         @media(orientation: portrait)
-            height: 4vw
+            height: unset
             writing-mode: unset
+            width: 16vw
+            font-size: 4vw
+            line-height: 5vw
+            border-radius: 1vw 1vw 0 0
 
         &--active
             background-color: #fff
@@ -42,12 +47,16 @@
     &__buttons
         display: flex
         flex-direction: column
-        justify-content: center
-        flex-basis: 8vw
+        justify-content: space-evenly
+        flex-basis: 18vw
+        flex-grow: 1
         background-color: #fff
         z-index: 3
         @media(orientation: portrait)
             flex-direction: row
             flex-wrap: wrap
-            align-items: flex-start
+            // align-items: center
+            align-content: space-evenly
             height: 50vw
+            flex-basis: 18vh
+            flex-grow: 1
