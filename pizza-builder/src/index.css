@@ -5,6 +5,12 @@ body {
   overflow: hidden;
   font-family: 'Amatic SC', cursive;
   font-weight: 700;
+  box-sizing: border-box;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
 }
 
 body {

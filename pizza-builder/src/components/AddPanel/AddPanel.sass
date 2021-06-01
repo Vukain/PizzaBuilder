@@ -47,7 +47,7 @@
     &__buttons
         display: flex
         flex-direction: column
-        justify-content: space-evenly
+        justify-content: center
         flex-basis: 18vw
         flex-grow: 1
         background-color: #fff
@@ -55,8 +55,9 @@
         @media(orientation: portrait)
             flex-direction: row
             flex-wrap: wrap
-            // align-items: center
-            align-content: space-evenly
+            align-content: stretch
+            justify-content: space-evenly
             height: 50vw
             flex-basis: 18vh
             flex-grow: 1
+            padding: 4px
