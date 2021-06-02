@@ -45,16 +45,16 @@ class Ingredient extends Component {
     ingredControl = (e, mode) => {
         switch (mode) {
             case 'rotate':
-                this.setState((prevState) => ({ rotate: prevState.rotate + 20 }))
+                this.setState((prevState) => ({ rotate: prevState.rotate + 15 }))
                 break;
             case 'counter':
-                this.setState((prevState) => ({ rotate: prevState.rotate - 20 }))
+                this.setState((prevState) => ({ rotate: prevState.rotate - 15 }))
                 break;
             case 'enlarge':
-                this.setState((prevState) => ({ scale: prevState.scale + 0.1 }))
+                this.setState((prevState) => ({ scale: prevState.scale + 0.15 }))
                 break;
             case 'shrink':
-                this.setState((prevState) => ({ scale: prevState.scale - 0.1 }))
+                this.setState((prevState) => ({ scale: prevState.scale - 0.15 }))
                 break;
             default:
                 console.log(`Sorry`);
@@ -75,12 +75,21 @@ class Ingredient extends Component {
         };
     };
 
+    onKeyHandler = (e) => {
+        if (e.key === 'e') {
+            this.setState(prevState => ({ scale: prevState.scale + 0.15 }))
+        } else if (e.key === 's') {
+            this.setState(prevState => ({ scale: prevState.scale - 0.15 }))
+        };
+    }
+
     onMouseDownHandler = (e) => {
         this.props.setCurrent(this.props.id);
         const { clientX, clientY } = e;
         this.setState((prevState) => ({ relX: clientX - prevState.x, relY: clientY - prevState.y, scale: prevState.scale + 0.2, cursor: 'grabbing' }))
         window.addEventListener('mousemove', this.onMouseMoveHandler);
         window.addEventListener('wheel', this.onScrollHandler);
+        window.addEventListener('keydown', this.onKeyHandler);
         window.addEventListener('mouseup', this.onMouseUpHandler);
     };
 
@@ -89,6 +98,7 @@ class Ingredient extends Component {
         this.setState((prevState) => ({ scale: prevState.scale - 0.2, cursor: 'grab' }));
         window.removeEventListener('mousemove', this.onMouseMoveHandler);
         window.removeEventListener('wheel', this.onScrollHandler);
+        window.removeEventListener('keydown', this.onKeyHandler);
         window.removeEventListener('mouseup', this.onMouseUpHandler);
         this.itemDeleter(clientX, clientY);
     };
@@ -113,7 +123,8 @@ class Ingredient extends Component {
     onTouchUpHandler = (e) => {
         const clientX = e.changedTouches[0].clientX;
         const clientY = e.changedTouches[0].clientY;
-        this.setState((prevState) => ({ scale: this.state.scale - 0.2, cursor: 'grab', touchRotate: false }));
+        const scaler = this.state.touchRotate ? 0.4 : 0.2;
+        this.setState((prevState) => ({ scale: this.state.scale - scaler, cursor: 'grab', touchRotate: false }));
         window.removeEventListener('touchmove', this.onTouchMoveHandler);
         window.removeEventListener('touchend', this.onTouchUpHandler);
         this.itemDeleter(clientX, clientY);
@@ -133,10 +144,11 @@ class Ingredient extends Component {
         return (
             <Hammer options={{
                 recognizers: {
-                    rotate: { enable: true }
+                    rotate: { enable: true }, pinch: { enable: true }
                 }
             }}
-                onRotate={this.onRotationHandler}>
+                onRotate={this.onRotationHandler}
+                onPinch={(e) => { console.log(e) }}>
                 <div>
                     <div className={cls} id={this.props.id} onTouchStart={this.onTouchDownHandler} onMouseDown={this.onMouseDownHandler} style={{
                         top: `${this.state.y}px`,
