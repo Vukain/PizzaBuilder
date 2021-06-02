@@ -4,6 +4,8 @@ import gsap from 'gsap';
 
 import './Ingredient.sass';
 
+import IngredientControl from '../IngredientControl/IngredientControl';
+
 class Ingredient extends Component {
 
     constructor(props) {
@@ -63,8 +65,14 @@ class Ingredient extends Component {
         window.removeEventListener('mousemove', this.onMouseMoveHandler);
         window.removeEventListener('wheel', this.onScrollHandler);
         window.removeEventListener('mouseup', this.onMouseUpHandler);
+        this.props.setCurrent(this.props.id);
+        console.log(this.props.current);
         this.itemDeleter(clientX, clientY);
     };
+
+    funce = (e) => {
+        this.setState((prevState) => ({ rotate: prevState.rotate + 20 }))
+    }
 
     onTouchMoveHandler = (e) => {
         if (!this.state.touchRotate) {
@@ -99,6 +107,8 @@ class Ingredient extends Component {
 
         let Io = this.state.ingred;
         const cls = `ingredient ingredient--${this.props.type.replace(' ', '_')}`;
+        const off = document.querySelector('.pizza_building').offsetLeft;
+        const controls = this.props.id === this.props.current ? <IngredientControl rotator={this.funce} styler={{ left: off }} /> : null;
 
         return (
             <Hammer options={{
@@ -107,18 +117,24 @@ class Ingredient extends Component {
                 }
             }}
                 onRotate={this.onRotationHandler}>
-                <div className={cls} id={this.props.id} onTouchStart={this.onTouchDownHandler} onMouseDown={this.onMouseDownHandler} style={{
-                    top: `${this.state.y}px`,
-                    left: `${this.state.x}px`,
-                    transform: ` translate(-50%, -50%) scale(${this.state.scale}) rotateZ(${this.state.rotate}deg)`,
-                    cursor: `${this.state.cursor}`,
-                }}>
+                <div>
+                    <div className={cls} id={this.props.id} onTouchStart={this.onTouchDownHandler} onMouseDown={this.onMouseDownHandler} style={{
+                        top: `${this.state.y}px`,
+                        left: `${this.state.x}px`,
+                        transform: ` translate(-50%, -50%) scale(${this.state.scale}) rotateZ(${this.state.rotate}deg)`,
+                        cursor: `${this.state.cursor}`,
+                    }}>
 
-                    <Suspense fallback={<div></div>}>
-                        < Io />
-                    </Suspense>
+                        <Suspense fallback={<div></div>}>
+                            < Io />
+                        </Suspense>
 
+
+                    </div>
+
+                    {controls}
                 </div>
+
             </Hammer>);
     };
 };

@@ -51,6 +51,7 @@ const TomatoSmallImg = React.lazy(() => import('./media/tomato_small.svg'));
 const AppProvider = ({ children }) => {
 
     const [ingreds, setIngreds] = useState([]);
+    const [currentIngred, setCurrentIngred] = useState(null);
     const [adders, setAdders] = useState({
         'cheese': ['camembert', 'camembert half', 'feta', 'rokpol blue', 'rokpol gold'],
         'herbs/fruit': ['basil', 'oregano', 'rucola', 'pineapple'],
@@ -93,7 +94,7 @@ const AppProvider = ({ children }) => {
     });
 
     return (
-        <AppContext.Provider value={{ ingreds, setIngreds, adders, setAdders, images, setImages }}>
+        <AppContext.Provider value={{ ingreds, setIngreds, adders, setAdders, images, setImages, currentIngred, setCurrentIngred }}>
             {children}
         </AppContext.Provider>
     );
