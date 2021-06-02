@@ -20,22 +20,46 @@ class Ingredient extends Component {
             x: this.lefts, y: this.tops, relX: 0, relY: 0, scale: 1, touchRotate: false, touchInitialRotate: 0, rotate: this.rotate, cursor: 'grab',
             ingred: this.ingred.length === undefined ? this.ingred : this.ingred[Math.floor(Math.random() * this.ingred.length)]
         };
-        this.onMouseMoveHandler = this.onMouseMoveHandler.bind(this);
     };
+
+    // componentDidMount() {
+    //     const tlb = gsap.timeline();
+    //     const buttons = document.querySelectorAll('.ingredient_control__button');
+    //     tlb.to(buttons, { duration: 1, scale: 1.2 });
+    // }
 
     itemDeleter = (clientX, clientY) => {
         const bin = document.querySelector('.ingred_dispencer__bin');
 
         const binPositionCheck = window.matchMedia('(orientation: landscape)').matches ?
             clientX < bin.offsetWidth && clientY > document.body.offsetHeight - bin.offsetHeight :
-            clientX < bin.offsetWidth && clientY < bin.offsetHeight;
+            clientX > bin.offsetLeft && clientY < bin.offsetHeight;
 
         if (binPositionCheck) {
             const tl = gsap.timeline({ onComplete: () => { this.props.setIngreds(this.props.ingreds.filter(el => el.id !== this.props.id)) } });
             const item = document.getElementById(this.props.id);
             tl.to(item, { duration: 1, scale: .2, opacity: 0.7, transformOrigin: 'top left', transform: 'rotateZ(120deg)' });
         };
-    }
+    };
+
+    ingredControl = (e, mode) => {
+        switch (mode) {
+            case 'rotate':
+                this.setState((prevState) => ({ rotate: prevState.rotate + 20 }))
+                break;
+            case 'counter':
+                this.setState((prevState) => ({ rotate: prevState.rotate - 20 }))
+                break;
+            case 'enlarge':
+                this.setState((prevState) => ({ scale: prevState.scale + 0.1 }))
+                break;
+            case 'shrink':
+                this.setState((prevState) => ({ scale: prevState.scale - 0.1 }))
+                break;
+            default:
+                console.log(`Sorry`);
+        };
+    };
 
     onMouseMoveHandler = (e) => {
         const { clientX, clientY } = e;
@@ -52,8 +76,9 @@ class Ingredient extends Component {
     };
 
     onMouseDownHandler = (e) => {
+        this.props.setCurrent(this.props.id);
         const { clientX, clientY } = e;
-        this.setState({ relX: clientX - this.state.x, relY: clientY - this.state.y, scale: 1.2, cursor: 'grabbing' })
+        this.setState((prevState) => ({ relX: clientX - prevState.x, relY: clientY - prevState.y, scale: prevState.scale + 0.2, cursor: 'grabbing' }))
         window.addEventListener('mousemove', this.onMouseMoveHandler);
         window.addEventListener('wheel', this.onScrollHandler);
         window.addEventListener('mouseup', this.onMouseUpHandler);
@@ -61,31 +86,26 @@ class Ingredient extends Component {
 
     onMouseUpHandler = (e) => {
         const { clientX, clientY } = e;
-        this.setState({ scale: 1, cursor: 'grab' });
+        this.setState((prevState) => ({ scale: prevState.scale - 0.2, cursor: 'grab' }));
         window.removeEventListener('mousemove', this.onMouseMoveHandler);
         window.removeEventListener('wheel', this.onScrollHandler);
         window.removeEventListener('mouseup', this.onMouseUpHandler);
-        this.props.setCurrent(this.props.id);
-        console.log(this.props.current);
         this.itemDeleter(clientX, clientY);
     };
-
-    funce = (e) => {
-        this.setState((prevState) => ({ rotate: prevState.rotate + 20 }))
-    }
 
     onTouchMoveHandler = (e) => {
         if (!this.state.touchRotate) {
             const clientX = e.touches[0].clientX;
             const clientY = e.touches[0].clientY;
             this.setState((prevState) => ({ x: clientX - prevState.relX, y: clientY - prevState.relY }));
-        }
+        };
     };
 
     onTouchDownHandler = (e) => {
+        this.props.setCurrent(this.props.id);
         const clientX = e.touches[0].clientX;
         const clientY = e.touches[0].clientY;
-        this.setState({ relX: clientX - this.state.x, relY: clientY - this.state.y, scale: 1.2, cursor: 'grabbing', touchInitialRotate: this.state.rotate })
+        this.setState((prevState) => ({ relX: clientX - prevState.x, relY: clientY - prevState.y, scale: prevState.scale + 0.2, cursor: 'grabbing', touchInitialRotate: prevState.rotate }));
         window.addEventListener('touchmove', this.onTouchMoveHandler);
         window.addEventListener('touchend', this.onTouchUpHandler);
     };
@@ -93,22 +113,22 @@ class Ingredient extends Component {
     onTouchUpHandler = (e) => {
         const clientX = e.changedTouches[0].clientX;
         const clientY = e.changedTouches[0].clientY;
-        this.setState({ scale: 1, cursor: 'grab', touchRotate: false });
+        this.setState((prevState) => ({ scale: this.state.scale - 0.2, cursor: 'grab', touchRotate: false }));
         window.removeEventListener('touchmove', this.onTouchMoveHandler);
         window.removeEventListener('touchend', this.onTouchUpHandler);
         this.itemDeleter(clientX, clientY);
     };
 
     onRotationHandler = (e) => {
-        this.setState({ rotate: Math.round(e.rotation), touchRotate: true })
+        this.setState({ rotate: Math.round(e.rotation), touchRotate: true });
     };
 
     render() {
 
         let Io = this.state.ingred;
         const cls = `ingredient ingredient--${this.props.type.replace(' ', '_')}`;
-        const off = document.querySelector('.pizza_building').offsetLeft;
-        const controls = this.props.id === this.props.current ? <IngredientControl rotator={this.funce} styler={{ left: off }} /> : null;
+        const controls = ['rotate', 'counter', 'shrink', 'enlarge'].map(elem => <IngredientControl rotator={(e) => { this.ingredControl(e, elem) }} type={elem} />);
+        const controlPanel = this.props.id === this.props.current ? controls : null;
 
         return (
             <Hammer options={{
@@ -124,15 +144,12 @@ class Ingredient extends Component {
                         transform: ` translate(-50%, -50%) scale(${this.state.scale}) rotateZ(${this.state.rotate}deg)`,
                         cursor: `${this.state.cursor}`,
                     }}>
-
                         <Suspense fallback={<div></div>}>
                             < Io />
                         </Suspense>
-
-
                     </div>
 
-                    {controls}
+                    {controlPanel}
                 </div>
 
             </Hammer>);

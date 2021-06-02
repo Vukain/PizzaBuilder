@@ -1,7 +1,55 @@
 .ingredient_control__button
-
+    transform: scale(0.3)
+    opacity: 0
+    z-index: -1
     position: absolute
-    width: 100px
-    height: 100px
-    top: 0
-    right: 0
+    width: 10vh
+    height: 10vh
+    margin: 5vh
+    background-color: #fff
+    color: #3dbacc
+    font-size: 3vh
+    font-weight: bold
+    border-radius: 50%
+    border: 4px solid #fff
+    cursor: pointer
+    transition: .2s
+    padding: 0
+    @media (orientation: portrait)
+        width: 14vw
+        height: 14vw
+        margin: 3vw
+        font-size: 5vw
+        border: 2px solid #fff
+
+    &:hover
+        background-color: #E7655C
+        color: #fff
+
+    &--counter
+        top: 0
+        left: 14vw
+        @media (orientation: portrait)
+            top: 14vh
+            left: 0
+
+    &--rotate
+        top: 0
+        right: 17vw
+        @media (orientation: portrait)
+            top: 14vh
+            right: 0
+
+    &--shrink
+        bottom: 0
+        left: 14vw
+        @media (orientation: portrait)
+            bottom: 27vh
+            left: 0
+
+    &--enlarge
+        bottom: 0
+        right: 17vw
+        @media (orientation: portrait)
+            bottom: 27vh
+            right: 0
