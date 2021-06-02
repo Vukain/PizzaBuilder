@@ -42,19 +42,22 @@ class Ingredient extends Component {
         };
     };
 
-    ingredControl = (e, mode) => {
+    ingredControl = (mode, value) => {
         switch (mode) {
             case 'rotate':
-                this.setState((prevState) => ({ rotate: prevState.rotate + 15 }))
+                this.setState((prevState) => ({ rotate: prevState.rotate + value }))
                 break;
             case 'counter':
-                this.setState((prevState) => ({ rotate: prevState.rotate - 15 }))
+                this.setState((prevState) => ({ rotate: prevState.rotate - value }))
                 break;
             case 'enlarge':
-                this.setState((prevState) => ({ scale: prevState.scale + 0.15 }))
+
+                this.setState((prevState) => ({ scale: prevState.scale + value / 100 }))
                 break;
             case 'shrink':
-                this.setState((prevState) => ({ scale: prevState.scale - 0.15 }))
+                if (this.state.scale > 0.2) {
+                    this.setState((prevState) => ({ scale: prevState.scale - value / 100 }))
+                }
                 break;
             default:
                 console.log(`Sorry`);
@@ -69,17 +72,17 @@ class Ingredient extends Component {
     onScrollHandler = (e) => {
         const { deltaY } = e;
         if (deltaY > 0) {
-            this.setState(prevState => ({ rotate: prevState.rotate + 5 }))
+            this.ingredControl('rotate', 5);
         } else {
-            this.setState(prevState => ({ rotate: prevState.rotate - 5 }))
+            this.ingredControl('counter', 5);
         };
     };
 
     onKeyHandler = (e) => {
         if (e.key === 'e') {
-            this.setState(prevState => ({ scale: prevState.scale + 0.15 }))
+            this.ingredControl('enlarge', 15);
         } else if (e.key === 's') {
-            this.setState(prevState => ({ scale: prevState.scale - 0.15 }))
+            this.ingredControl('shrink', 15);
         };
     }
 
@@ -136,9 +139,9 @@ class Ingredient extends Component {
 
     render() {
 
-        let Io = this.state.ingred;
+        const Io = this.state.ingred;
         const cls = `ingredient ingredient--${this.props.type.replace(' ', '_')}`;
-        const controls = ['rotate', 'counter', 'shrink', 'enlarge'].map(elem => <IngredientControl rotator={(e) => { this.ingredControl(e, elem) }} type={elem} />);
+        const controls = ['rotate', 'counter', 'shrink', 'enlarge'].map(elem => <IngredientControl rotator={() => { this.ingredControl(elem, 15) }} type={elem} />);
         const controlPanel = this.props.id === this.props.current ? controls : null;
 
         return (
