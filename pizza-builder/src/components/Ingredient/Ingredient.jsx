@@ -51,13 +51,14 @@ class Ingredient extends Component {
                 this.setState((prevState) => ({ rotate: prevState.rotate - value }))
                 break;
             case 'enlarge':
-
-                this.setState((prevState) => ({ scale: prevState.scale + value / 100 }))
+                if (this.state.scale < 6) {
+                    this.setState((prevState) => ({ scale: prevState.scale + value / 100 }))
+                };
                 break;
             case 'shrink':
                 if (this.state.scale > 0.2) {
                     this.setState((prevState) => ({ scale: prevState.scale - value / 100 }))
-                }
+                };
                 break;
             default:
                 console.log(`Sorry`);
