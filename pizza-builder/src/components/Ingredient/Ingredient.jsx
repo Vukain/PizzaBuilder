@@ -51,7 +51,7 @@ class Ingredient extends Component {
     ingredControl = (mode, value) => {
         switch (mode) {
             case 'rotate':
-                this.setState((prevState) => ({ rotate: prevState.rotate + value, touchInitialRotate: prevState.touchInitialRotate + value}))
+                this.setState((prevState) => ({ rotate: prevState.rotate + value, touchInitialRotate: prevState.touchInitialRotate + value }))
                 break;
             case 'counter':
                 this.setState((prevState) => ({ rotate: prevState.rotate - value, touchInitialRotate: prevState.touchInitialRotate - value }))
@@ -156,7 +156,9 @@ class Ingredient extends Component {
     };
 
     onPinchHandler = (e) => {
-        this.setState((prevState) => ({ scale: e.scale * prevState.touchInitialScale }));
+        if (this.state.scale < 6 || e.scale < 1) {
+            this.setState((prevState) => ({ scale: e.scale * prevState.touchInitialScale }));
+        };
     };
 
     onPinchEndHandler = (e) => {
