@@ -6,7 +6,7 @@ import gsap from 'gsap';
 
 import './Ingredient.sass';
 
-import IngredientControl from '../IngredientControl/IngredientControl';
+import IngredControlPanel from '../IngredControlPanel/IngredControlPanel';
 
 class Ingredient extends Component {
 
@@ -51,29 +51,36 @@ class Ingredient extends Component {
     ingredControl = (mode, value) => {
         switch (mode) {
             case 'rotate':
-                this.setState((prevState) => ({ rotate: prevState.rotate + value, touchInitialRotate: prevState.touchInitialRotate + value }))
+                this.setState((prevState) => ({ rotate: prevState.rotate + value, touchInitialRotate: prevState.touchInitialRotate + value }));
                 break;
             case 'counter':
-                this.setState((prevState) => ({ rotate: prevState.rotate - value, touchInitialRotate: prevState.touchInitialRotate - value }))
+                this.setState((prevState) => ({ rotate: prevState.rotate - value, touchInitialRotate: prevState.touchInitialRotate - value }));
                 break;
             case 'enlarge':
                 if (this.state.scale < 6) {
-                    this.setState((prevState) => ({ scale: prevState.scale + value / 100, touchInitialScale: prevState.touchInitialScale + value / 100 }))
+                    this.setState((prevState) => ({ scale: prevState.scale + value / 100, touchInitialScale: prevState.touchInitialScale + value / 100 }));
                 };
                 break;
             case 'shrink':
                 if (this.state.scale > 0.2) {
-                    this.setState((prevState) => ({ scale: prevState.scale - value / 100, touchInitialScale: prevState.touchInitialScale - value / 100 }))
+                    this.setState((prevState) => ({ scale: prevState.scale - value / 100, touchInitialScale: prevState.touchInitialScale - value / 100 }));
                 };
+                break;
+            case 'up':
+                this.setState((prevState) => ({ y: prevState.y - value }));
+                break;
+            case 'down':
+                this.setState((prevState) => ({ y: prevState.y + value }));
+                break;
+            case 'left':
+                this.setState((prevState) => ({ x: prevState.x - value }));
+                break;
+            case 'right':
+                this.setState((prevState) => ({ x: prevState.x + value }));
                 break;
             default:
                 console.log(`Sorry`);
         };
-    };
-
-    onMouseMoveHandler = (e) => {
-        const { clientX, clientY } = e;
-        this.setState((prevState) => ({ x: clientX - prevState.relX, y: clientY - prevState.relY }));
     };
 
     onScrollHandler = (e) => {
@@ -86,12 +93,24 @@ class Ingredient extends Component {
     };
 
     onKeyHandler = (e) => {
-        if (e.key === 'e') {
+        if (e.key === 'w') {
             this.ingredControl('enlarge', 15);
         } else if (e.key === 's') {
             this.ingredControl('shrink', 15);
+        } else if (e.key === 'e') {
+            this.ingredControl('rotate', 15);
+        } else if (e.key === 'q') {
+            this.ingredControl('counter', 15);
+        } else if (e.key === 'ArrowUp' && this.state.y > 0) {
+            this.ingredControl('up', 10);
+        } else if (e.key === 'ArrowDown' && this.state.y < window.innerHeight) {
+            this.ingredControl('down', 10);
+        } else if (e.key === 'ArrowLeft' && this.state.x > 0) {
+            this.ingredControl('left', 10);
+        } else if (e.key === 'ArrowRight' && this.state.x < window.innerWidth) {
+            this.ingredControl('right', 10);
         };
-    }
+    };
 
     onMouseDownHandler = (e) => {
         this.props.setCurrent(this.props.id);
@@ -99,8 +118,12 @@ class Ingredient extends Component {
         this.setState((prevState) => ({ relX: clientX - prevState.x, relY: clientY - prevState.y, scale: prevState.scale + 0.2, cursor: 'grabbing' }))
         window.addEventListener('mousemove', this.onMouseMoveHandler);
         window.addEventListener('wheel', this.onScrollHandler);
-        window.addEventListener('keydown', this.onKeyHandler);
         window.addEventListener('mouseup', this.onMouseUpHandler);
+    };
+
+    onMouseMoveHandler = (e) => {
+        const { clientX, clientY } = e;
+        this.setState((prevState) => ({ x: clientX - prevState.relX, y: clientY - prevState.relY }));
     };
 
     onMouseUpHandler = (e) => {
@@ -108,7 +131,6 @@ class Ingredient extends Component {
         this.setState((prevState) => ({ scale: prevState.scale - 0.2, cursor: 'grab' }));
         window.removeEventListener('mousemove', this.onMouseMoveHandler);
         window.removeEventListener('wheel', this.onScrollHandler);
-        window.removeEventListener('keydown', this.onKeyHandler);
         window.removeEventListener('mouseup', this.onMouseUpHandler);
         this.itemDeleter(clientX, clientY);
     };
@@ -165,12 +187,19 @@ class Ingredient extends Component {
         this.setState((prevState) => ({ touchInitialScale: prevState.scale }));
     };
 
+    onFocusHandler = (e) => {
+        this.props.setCurrent(this.props.id);
+        // this.setState((prevState) => ({ scale: prevState.scale + 0.2 }));
+    };
+
+    onBlurHandler = (e) => {
+        // this.setState((prevState) => ({ scale: prevState.scale - 0.2 }));
+    };
+
     render() {
 
         const Io = this.state.ingred;
         const cls = `ingredient ingredient--${this.props.type.replace(' ', '_')}`;
-        const controls = ['rotate', 'counter', 'shrink', 'enlarge'].map(elem => <IngredientControl key={elem} rotator={() => { this.ingredControl(elem, 15) }} type={elem} />);
-        const controlPanel = this.props.id === this.props.current ? controls : null;
 
         return (
             <Hammer options={{
@@ -185,7 +214,7 @@ class Ingredient extends Component {
                 onPinchOut={this.onPinchHandler}
                 onPinchEnd={this.onPinchEndHandler}>
                 <div>
-                    <div className={cls} id={this.props.id} onTouchStart={this.onTouchDownHandler} onMouseDown={this.onMouseDownHandler} style={{
+                    <div tabIndex='1' className={cls} id={this.props.id} onFocus={this.onFocusHandler} onBlur={this.onBlurHandler} onTouchStart={this.onTouchDownHandler} onMouseDown={this.onMouseDownHandler} style={{
                         top: `${this.state.y}px`,
                         left: `${this.state.x}px`,
                         transform: ` translate(-50%, -50%) scale(${this.state.scale}) rotateZ(${this.state.rotate}deg)`,
@@ -195,8 +224,7 @@ class Ingredient extends Component {
                             < Io />
                         </Suspense>
                     </div>
-
-                    {controlPanel}
+                    {this.props.id === this.props.current ? <IngredControlPanel listener={this.onKeyHandler} control={this.ingredControl} /> : null}
                 </div>
 
             </Hammer>);

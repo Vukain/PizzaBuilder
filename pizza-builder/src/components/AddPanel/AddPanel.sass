@@ -3,7 +3,6 @@
     display: flex
     flex-grow: 0
     flex-basis: 17vw
-    overflow: visible
     @media(orientation: portrait)
         flex-direction: column
         flex-basis: 27vh
@@ -33,6 +32,7 @@
         transform: scale(1.1)
         -webkit-tap-highlight-color: rgba(0,0,0,0)
         -webkit-tap-highlight-color: transparent
+        outline: none
         @media(orientation: portrait)
             height: unset
             writing-mode: unset
@@ -40,6 +40,9 @@
             font-size: 4.5vw
             line-height: 7vw
             border-radius: 1vw 1vw 0 0
+
+        &:focus
+            background-color: #fff
 
         &--active
             background-color: #fff
@@ -78,6 +81,7 @@
         transition: .3s
         -webkit-tap-highlight-color: rgba(0,0,0,0)
         -webkit-tap-highlight-color: transparent
+        outline: none
         @media(orientation: portrait)
             padding: 0
             border-radius: 1vw
@@ -88,5 +92,9 @@
             margin: 2px
             flex-grow: 1
         &:hover
+            color: #fff
+            background-color: #54cc94
+
+        &:focus
             color: #fff
             background-color: #54cc94

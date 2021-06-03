@@ -4,6 +4,21 @@
     width: calc(18 * var(--jed))
     height: calc(18 * var(--jed))
     transition: transform .1s
+    outline: none
+    border-radius: 50%
+
+    @keyframes selector
+        0%
+            transform: rotate(0deg)
+        25%
+            transform: rotate(25deg)
+        50%
+            transform: rotate(0deg)
+        75%
+            transform: rotate(-25deg)
+        100%
+            transform: rotate(0deg)
+
     @media (orientation: portrait)
         --jed: 1.2vw
         transition: transform 0s
@@ -63,3 +78,6 @@
     &--basil
         width: calc(16 * var(--jed))
         height: calc(8 * var(--jed))
+
+    &:focus svg
+        animation: selector 2s 1

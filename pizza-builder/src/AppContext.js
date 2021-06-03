@@ -54,11 +54,11 @@ const AppProvider = ({ children }) => {
     const [currentIngred, setCurrentIngred] = useState(null);
     const [adders, setAdders] = useState({
         'cheese': ['camembert', 'camembert half', 'feta', 'rokpol blue', 'rokpol gold'],
-        'herbs/fruit': ['basil', 'oregano', 'rucola', 'pineapple'],
+        'herbs/other': ['basil', 'oregano', 'rucola', 'pineapple', 'shroom dark', 'shroom light'],
         'meat': ['ham', 'prosciutto', 'salami', 'salami aged'],
         'seafood': ['mussel', 'mussel opened', 'mussel closed', 'octopus', 'shrimp', 'shrimp shell'],
         'veggies': ['chilli green', 'chilli red', 'chilli yellow', 'olive black', 'olive green',
-            'onion', 'tomato', 'cocktail tomato', 'shroom dark', 'shroom light']
+            'onion', 'tomato', 'cocktail tomato']
     });
 
     const [images, setImages] = useState({
