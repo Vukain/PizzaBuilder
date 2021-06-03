@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Tab = (props) => {
+
     const onClickHandler = () => {
         props.setActive(props.title);
     }
@@ -9,7 +10,7 @@ const Tab = (props) => {
     const cls = `ingred_adder__tab ${active}`
 
     return (
-        <div className={cls} tabIndex='0' onClick={onClickHandler}><p>{props.title}</p></div>
+        <div className={cls} onClick={onClickHandler}><p>{props.title}</p></div>
     );
 }
 
