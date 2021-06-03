@@ -1,5 +1,7 @@
 import React, { Component, Suspense } from 'react';
 import Hammer from 'react-hammerjs';
+// import Hammor from 'hammerjs';
+
 import gsap from 'gsap';
 
 import './Ingredient.sass';
@@ -17,15 +19,19 @@ class Ingredient extends Component {
         this.lefts = document.querySelector('.ingred_dispencer__plate').offsetWidth / 2;
         this.rotate = window.matchMedia('(orientation: landscape)').matches ? this.vertical.includes(this.props.type) ? 90 : this.verticalCounter.includes(this.props.type) ? -90 : 0 : 0;
         this.state = {
-            x: this.lefts, y: this.tops, relX: 0, relY: 0, scale: 1, touchRotate: false, touchInitialRotate: 0, rotate: this.rotate, cursor: 'grab',
+            x: this.lefts, y: this.tops, relX: 0, relY: 0, scale: 1, touchInitialScale: 1, rotate: this.rotate, touchInitialRotate: this.rotate, touchRotate: false, cursor: 'grab',
             ingred: this.ingred.length === undefined ? this.ingred : this.ingred[Math.floor(Math.random() * this.ingred.length)]
         };
     };
 
     // componentDidMount() {
-    //     const tlb = gsap.timeline();
-    //     const buttons = document.querySelectorAll('.ingredient_control__button');
-    //     tlb.to(buttons, { duration: 1, scale: 1.2 });
+    //     const el = document.querySelector(`#${this.props.id}`);
+
+    //     const hammertime = new Hammor(el);
+    //     hammertime.get('rotate').set({ enable: true })
+    //     hammertime.on('rotate', e => {
+    //         console.log('hammoooor')
+    //     })
     // }
 
     itemDeleter = (clientX, clientY) => {
@@ -45,19 +51,19 @@ class Ingredient extends Component {
     ingredControl = (mode, value) => {
         switch (mode) {
             case 'rotate':
-                this.setState((prevState) => ({ rotate: prevState.rotate + value }))
+                this.setState((prevState) => ({ rotate: prevState.rotate + value, touchInitialRotate: prevState.touchInitialRotate + value}))
                 break;
             case 'counter':
-                this.setState((prevState) => ({ rotate: prevState.rotate - value }))
+                this.setState((prevState) => ({ rotate: prevState.rotate - value, touchInitialRotate: prevState.touchInitialRotate - value }))
                 break;
             case 'enlarge':
                 if (this.state.scale < 6) {
-                    this.setState((prevState) => ({ scale: prevState.scale + value / 100 }))
+                    this.setState((prevState) => ({ scale: prevState.scale + value / 100, touchInitialScale: prevState.touchInitialScale + value / 100 }))
                 };
                 break;
             case 'shrink':
                 if (this.state.scale > 0.2) {
-                    this.setState((prevState) => ({ scale: prevState.scale - value / 100 }))
+                    this.setState((prevState) => ({ scale: prevState.scale - value / 100, touchInitialScale: prevState.touchInitialScale - value / 100 }))
                 };
                 break;
             default:
@@ -119,7 +125,7 @@ class Ingredient extends Component {
         this.props.setCurrent(this.props.id);
         const clientX = e.touches[0].clientX;
         const clientY = e.touches[0].clientY;
-        this.setState((prevState) => ({ relX: clientX - prevState.x, relY: clientY - prevState.y, scale: prevState.scale + 0.2, cursor: 'grabbing', touchInitialRotate: prevState.rotate }));
+        this.setState((prevState) => ({ relX: clientX - prevState.x, relY: clientY - prevState.y, scale: prevState.scale + 0.2, cursor: 'grabbing' }));
         window.addEventListener('touchmove', this.onTouchMoveHandler);
         window.addEventListener('touchend', this.onTouchUpHandler);
     };
@@ -134,15 +140,34 @@ class Ingredient extends Component {
         this.itemDeleter(clientX, clientY);
     };
 
-    onRotationHandler = (e) => {
-        this.setState({ rotate: Math.round(e.rotation), touchRotate: true });
+    onRotateStartHandler = (e) => {
+        console.log('initial' + Math.round(e.rotation))
+        this.setState((prevState) => ({ touchInitialRotate: prevState.touchInitialRotate - Math.round(e.rotation), touchRotate: true }));
+    };
+
+    onRotateMoveHandler = (e) => {
+        console.log(this.state.touchInitialRotate + Math.round(e.rotation))
+        this.setState((prevState) => ({ rotate: prevState.touchInitialRotate + Math.round(e.rotation) }));
+    };
+
+    onRotateEndHandler = (e) => {
+        console.log('end')
+        this.setState((prevState) => ({ touchInitialRotate: prevState.rotate }));
+    };
+
+    onPinchHandler = (e) => {
+        this.setState((prevState) => ({ scale: e.scale * prevState.touchInitialScale }));
+    };
+
+    onPinchEndHandler = (e) => {
+        this.setState((prevState) => ({ touchInitialScale: prevState.scale }));
     };
 
     render() {
 
         const Io = this.state.ingred;
         const cls = `ingredient ingredient--${this.props.type.replace(' ', '_')}`;
-        const controls = ['rotate', 'counter', 'shrink', 'enlarge'].map(elem => <IngredientControl rotator={() => { this.ingredControl(elem, 15) }} type={elem} />);
+        const controls = ['rotate', 'counter', 'shrink', 'enlarge'].map(elem => <IngredientControl key={elem} rotator={() => { this.ingredControl(elem, 15) }} type={elem} />);
         const controlPanel = this.props.id === this.props.current ? controls : null;
 
         return (
@@ -151,8 +176,12 @@ class Ingredient extends Component {
                     rotate: { enable: true }, pinch: { enable: true }
                 }
             }}
-                onRotate={this.onRotationHandler}
-                onPinch={(e) => { console.log(e) }}>
+                onRotateStart={this.onRotateStartHandler}
+                onRotateMove={this.onRotateMoveHandler}
+                onRotateEnd={this.onRotateEndHandler}
+                onPinchIn={this.onPinchHandler}
+                onPinchOut={this.onPinchHandler}
+                onPinchEnd={this.onPinchEndHandler}>
                 <div>
                     <div className={cls} id={this.props.id} onTouchStart={this.onTouchDownHandler} onMouseDown={this.onMouseDownHandler} style={{
                         top: `${this.state.y}px`,
