@@ -11,15 +11,22 @@
 
     @keyframes selector
         0%
-            transform: rotate(0deg)
-        25%
-            transform: rotate(25deg)
+            transform: scale(1)
         50%
-            transform: rotate(0deg)
-        75%
-            transform: rotate(-25deg)
+            transform: scale(1.2)
         100%
-            transform: rotate(0deg)
+            transform: scale(1)
+
+        // 0%
+        //     transform: rotate(0deg)
+        // 25%
+        //     transform: rotate(25deg)
+        // 50%
+        //     transform: rotate(0deg)
+        // 75%
+        //     transform: rotate(-25deg)
+        // 100%
+        //     transform: rotate(0deg)
 
     @media (orientation: portrait)
         --jed: 1.2vw
@@ -84,4 +91,4 @@
         height: calc(8 * var(--jed))
 
     &:focus svg
-        animation: selector 2s 1
+        animation: selector 1s 1
