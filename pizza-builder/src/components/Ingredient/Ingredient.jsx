@@ -93,13 +93,13 @@ class Ingredient extends Component {
     };
 
     onKeyHandler = (e) => {
-        if (e.key === 'w') {
+        if (e.key === 'w' || e.key === 'W') {
             this.ingredControl('enlarge', 15);
-        } else if (e.key === 's') {
+        } else if (e.key === 's' || e.key === 'S') {
             this.ingredControl('shrink', 15);
-        } else if (e.key === 'e') {
+        } else if (e.key === 'e' || e.key === 'E') {
             this.ingredControl('rotate', 15);
-        } else if (e.key === 'q') {
+        } else if (e.key === 'q' || e.key === 'Q') {
             this.ingredControl('counter', 15);
         } else if (e.key === 'ArrowUp' && this.state.y > 0) {
             this.ingredControl('up', 10);
