@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/PizzaBuilder/static/css/main.40de634b.chunk.css",
+    "main.css": "/PizzaBuilder/static/css/main.2cb73851.chunk.css",
     "main.js": "/PizzaBuilder/static/js/main.3703976e.chunk.js",
     "main.js.map": "/PizzaBuilder/static/js/main.3703976e.chunk.js.map",
     "runtime-main.js": "/PizzaBuilder/static/js/runtime-main.95598a3a.js",
@@ -102,14 +102,14 @@
     "static/js/48.acd4e85e.chunk.js.map": "/PizzaBuilder/static/js/48.acd4e85e.chunk.js.map",
     "index.html": "/PizzaBuilder/index.html",
     "static/css/2.679831fc.chunk.css.map": "/PizzaBuilder/static/css/2.679831fc.chunk.css.map",
-    "static/css/main.40de634b.chunk.css.map": "/PizzaBuilder/static/css/main.40de634b.chunk.css.map",
+    "static/css/main.2cb73851.chunk.css.map": "/PizzaBuilder/static/css/main.2cb73851.chunk.css.map",
     "static/js/2.d7f83472.chunk.js.LICENSE.txt": "/PizzaBuilder/static/js/2.d7f83472.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.95598a3a.js",
     "static/css/2.679831fc.chunk.css",
     "static/js/2.d7f83472.chunk.js",
-    "static/css/main.40de634b.chunk.css",
+    "static/css/main.2cb73851.chunk.css",
     "static/js/main.3703976e.chunk.js"
   ]
 }
