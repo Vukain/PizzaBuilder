@@ -6,6 +6,9 @@ import { AppContext } from '../../AppContext';
 
 import Ingredient from '../Ingredient/Ingredient';
 
+import PlateImg from '../../media/dispencer_plate.svg';
+import BinImg from '../../media/dispencer_bin.svg';
+
 const AddPanel = (props) => {
 
     const { ingreds, setIngreds } = useContext(AppContext);
@@ -27,11 +30,14 @@ const AddPanel = (props) => {
 
     return (
         <div className="ingred_dispencer">
-            <div className="ingred_dispencer__plate">
+            <div className="ingred_dispencer__plate" >
+                <div className="ingred_dispencer__plate_image"><PlateImg /></div>
+
                 {transformIngredients}
             </div>
 
             <div className="ingred_dispencer__bin">
+                <div className="ingred_dispencer__bin_image"><BinImg /></div>
             </div>
 
         </div>
