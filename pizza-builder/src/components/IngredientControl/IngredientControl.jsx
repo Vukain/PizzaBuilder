@@ -13,7 +13,7 @@ const IngredientControl = (props) => {
         const [elementsButton] = buttonWrapper.current.children;
         const el = elementsButton.querySelector('.ingredient_control__button');
 
-        // tlb.fromTo(el, { scale: 0.3 }, { duration: 1, scale: 1, autoAlpha: 1, ease: 'back.out(3)' })
+        tlb.to(el, { duration: 1, scale: 1, autoAlpha: 1, ease: 'back.out(3)' })
     });
 
     return (
