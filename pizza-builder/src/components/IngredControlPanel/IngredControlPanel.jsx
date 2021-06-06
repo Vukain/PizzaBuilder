@@ -12,7 +12,7 @@ const IngredControlPanel = (props) => {
         };
     });
 
-    const controls = ['counter', 'rotate', 'shrink', 'enlarge'].map(elem => <IngredientControl key={elem} controller={() => { props.control(elem, 15) }} type={elem} />);
+    const controls = ['counter', 'rotate', 'shrink', 'enlarge', 'higher', 'lower'].map(elem => <IngredientControl key={elem} controller={() => { props.control(elem, 15) }} type={elem} />);
 
     return (
         <>

@@ -24,15 +24,9 @@ class Ingredient extends Component {
         };
     };
 
-    // componentDidMount() {
-    //     const el = document.querySelector(`#${this.props.id}`);
-
-    //     const hammertime = new Hammor(el);
-    //     hammertime.get('rotate').set({ enable: true })
-    //     hammertime.on('rotate', e => {
-    //         console.log('hammoooor')
-    //     })
-    // }
+    componentDidMount() {
+        this.props.setCurrent(this.props.id);
+    }
 
     itemDeleter = (clientX, clientY) => {
         const bin = document.querySelector('.ingred_dispencer__bin');
@@ -45,6 +39,28 @@ class Ingredient extends Component {
             const tl = gsap.timeline({ onComplete: () => { this.props.setIngreds(this.props.ingreds.filter(el => el.id !== this.props.id)) } });
             const item = document.getElementById(this.props.id);
             tl.to(item, { duration: 1, scale: .2, opacity: 0.7, transformOrigin: 'top left', transform: 'rotateZ(120deg)' });
+        };
+    };
+
+    itemZChanger = (direction) => {
+        let idxe = 0;
+
+        this.props.ingreds.forEach((el, idx) => { if (el.id === this.props.id) { idxe = idx } })
+
+        if (direction === 'higher') {
+            if (idxe < this.props.ingreds.length - 1) {
+                const newElems = [...this.props.ingreds];
+                const el = newElems.splice(idxe, 1);
+                newElems.splice(idxe + 1, 0, ...el);
+                this.props.setIngreds(newElems)
+            };
+        } else {
+            if (idxe > 0) {
+                const newElems = [...this.props.ingreds];
+                const el = newElems.splice(idxe, 1);
+                newElems.splice(idxe - 1, 0, ...el);
+                this.props.setIngreds(newElems)
+            };
         };
     };
 
@@ -78,6 +94,12 @@ class Ingredient extends Component {
             case 'right':
                 this.setState((prevState) => ({ x: prevState.x + value }));
                 break;
+            case 'higher':
+                this.itemZChanger('higher');;
+                break;
+            case 'lower':
+                this.itemZChanger('lower');;
+                break;
             default:
                 console.log(`Sorry`);
         };
@@ -101,6 +123,14 @@ class Ingredient extends Component {
             this.ingredControl('rotate', 15);
         } else if (e.key === 'q' || e.key === 'Q') {
             this.ingredControl('counter', 15);
+        } else if (e.key === 'x' || e.key === 'X') {
+            const tl = gsap.timeline({ onComplete: () => { this.props.setIngreds(this.props.ingreds.filter(el => el.id !== this.props.id)) } });
+            const item = document.getElementById(this.props.id);
+            tl.to(item, { duration: 1, scale: .2, opacity: 0.7, transformOrigin: 'top left', transform: 'rotateZ(120deg)' });
+        } else if (e.key === 'c' || e.key === 'C') {
+            this.itemZChanger('higher');
+        } else if (e.key === 'z' || e.key === 'Z') {
+            this.itemZChanger('lower');
         } else if (e.key === 'ArrowUp' && this.state.y > 0) {
             this.ingredControl('up', 10);
         } else if (e.key === 'ArrowDown' && this.state.y < window.innerHeight) {
@@ -199,7 +229,8 @@ class Ingredient extends Component {
     render() {
 
         const Io = this.state.ingred;
-        const cls = `ingredient ingredient--${this.props.type.replace(' ', '_')}`;
+        const active = this.props.id === this.props.current ? 'ingredient--active' : null;
+        const cls = `ingredient ingredient--${this.props.type.replace(' ', '_')} ${active}`;
 
         return (
             <Hammer options={{

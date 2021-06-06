@@ -8,12 +8,15 @@
     border-radius: 50%
     margin-top: -5vh
     margin-left: -5vh
+    // box-shadow: #fdfdfd 0px 0px 0px 10px
 
     @keyframes selector
         0%
             transform: scale(1)
-        50%
+        12.5%
             transform: scale(1.2)
+        25%
+            transform: scale(1)
         100%
             transform: scale(1)
 
@@ -90,5 +93,7 @@
         width: calc(16 * var(--jed))
         height: calc(8 * var(--jed))
 
-    &:focus svg
-        animation: selector 1s 1
+    &--active svg
+        animation: selector 4s infinite
+        // box-shadow: 10px 5px 5px black
+        filter: drop-shadow(0px 0px 0px 2px red)

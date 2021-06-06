@@ -1,6 +1,6 @@
 .ingredient_control__button
-    transform: scale(0.3)
-    opacity: 0
+    box-sizing: border-box
+    opacity: 1
     z-index: -1
     position: absolute
     width: 10vh
@@ -16,9 +16,10 @@
     transition: .2s
     padding: 0
     outline: none
+
     @media (orientation: portrait)
-        width: 14vw
-        height: 14vw
+        width: 13vw
+        height: 13vw
         margin: 3vw
         font-size: 5vw
         border: 2px solid #fff
@@ -35,26 +36,42 @@
         top: 0
         left: 14vw
         @media (orientation: portrait)
-            top: 14vh
-            left: 0
+            top: 19vh
+            left: -2vw
 
     &--rotate
         top: 0
         right: 17vw
         @media (orientation: portrait)
-            top: 14vh
-            right: 0
+            top: 19vh
+            right: -2vw
 
     &--shrink
         bottom: 0
         left: 14vw
         @media (orientation: portrait)
             bottom: 27vh
-            left: 0
+            left: 0vw
 
     &--enlarge
         bottom: 0
         right: 17vw
         @media (orientation: portrait)
             bottom: 27vh
-            right: 0
+            right: 0vw
+
+    &--higher
+        top: 30vh
+        left: 11vw
+        @media (orientation: portrait)
+            top: 13vh
+            left: unset
+            right: 9vw
+
+    &--lower
+        bottom: 30vh
+        left: 11vw
+        @media (orientation: portrait)
+            bottom: unset
+            top: 13vh
+            left: 9vw
