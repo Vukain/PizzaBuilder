@@ -1,1 +1,0 @@
-export { default as PlateImg } from './dispencer_plate.svg';

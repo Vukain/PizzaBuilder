@@ -33,6 +33,7 @@
         -webkit-tap-highlight-color: rgba(0,0,0,0)
         -webkit-tap-highlight-color: transparent
         outline: none
+        transition: transform .3s
         @media(orientation: portrait)
             height: unset
             writing-mode: unset
@@ -41,12 +42,9 @@
             line-height: 7vw
             border-radius: 1vw 1vw 0 0
 
-        &:focus
+        &--active, &:focus, &:hover
             background-color: #fff
 
-        &--active
-            background-color: #fff
-            transition: transform .3s
             transform: scale(1.2)
 
     &__buttons
@@ -91,10 +89,6 @@
             border: 0px solid transparent
             margin: 2px
             flex-grow: 1
-        &:hover
-            color: #fff
-            background-color: #54cc94
-
-        &:focus
+        &:hover, &:focus
             color: #fff
             background-color: #54cc94
