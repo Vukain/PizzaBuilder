@@ -7,7 +7,7 @@ import { AppContext } from '../../AppContext';
 
 const PizzaBase = () => {
 
-    const { currentIngred, setCurrentIngred } = useContext(AppContext);
+    const { setCurrentIngred } = useContext(AppContext);
 
     return (
         <div className="pizza_building" onClick={() => { setCurrentIngred(null) }}>

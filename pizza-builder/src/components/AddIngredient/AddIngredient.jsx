@@ -11,7 +11,7 @@ const AddInredient = (props) => {
     }
 
     return (
-        <button className='ingred_adder__button' onClick={onAddHandler}>Add {props.type}</button>);
+        <button className={`ingred_adder__button ${['cucumber', 'pickle'].includes(props.type) ? 'ingred_adder__button--wide' : null}`} onClick={onAddHandler}>{props.type}</button>);
 }
 
 export default AddInredient;

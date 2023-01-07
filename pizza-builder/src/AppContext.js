@@ -12,6 +12,8 @@ const ChilliYellowImgA = React.lazy(() => import('./media/chilli_yellow_a.svg'))
 const ChilliYellowImgB = React.lazy(() => import('./media/chilli_yellow_b.svg'));
 const ChilliGreenImgA = React.lazy(() => import('./media/chilli_green_a.svg'));
 const ChilliGreenImgB = React.lazy(() => import('./media/chilli_green_b.svg'));
+const CucumberFresh = React.lazy(() => import('./media/cucumber_fresh.svg'));
+const CucumberPickled = React.lazy(() => import('./media/cucumber_pickled.svg'));
 const FetaImgA = React.lazy(() => import('./media/feta_a.svg'));
 const FetaImgB = React.lazy(() => import('./media/feta_b.svg'));
 const HamImgA = React.lazy(() => import('./media/ham_a.svg'));
@@ -53,12 +55,12 @@ const AppProvider = ({ children }) => {
     const [ingreds, setIngreds] = useState([]);
     const [currentIngred, setCurrentIngred] = useState(null);
     const [adders, setAdders] = useState({
-        'cheese': ['camembert', 'camembert half', 'feta', 'rokpol blue', 'rokpol gold'],
+        'cheese': ['camembert', 'camembert half', 'feta', 'roquefort blue', 'roquefort gold'],
         'herbs/other': ['basil', 'oregano', 'rucola', 'pineapple', 'shroom dark', 'shroom light'],
         'meat': ['ham', 'prosciutto', 'salami', 'salami aged'],
-        'seafood': ['mussel', 'mussel opened', 'mussel closed', 'octopus', 'shrimp', 'shrimp shell'],
+        'seafood': ['mussel', 'mussel opened', 'mussel closed', 'octopus', 'shrimp peeled', 'shrimp'],
         'veggies': ['chilli green', 'chilli red', 'chilli yellow', 'olive black', 'olive green',
-            'onion', 'tomato', 'cocktail tomato']
+            'onion', 'tomato', 'cocktail tomato', 'cucumber', 'pickle']
     });
 
     const [images, setImages] = useState({
@@ -91,6 +93,8 @@ const AppProvider = ({ children }) => {
         'shroom light': ShroomLightImg,
         'tomato': TomatoBigImg,
         'cocktail tomato': TomatoSmallImg,
+        'cucumber': CucumberFresh,
+        'pickle': CucumberPickled,
     });
 
     return (
