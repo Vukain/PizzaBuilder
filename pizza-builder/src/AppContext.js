@@ -59,8 +59,8 @@ const AppProvider = ({ children }) => {
         'herbs/other': ['basil', 'oregano', 'rucola', 'pineapple', 'shroom dark', 'shroom light'],
         'meat': ['ham', 'prosciutto', 'salami', 'salami aged'],
         'seafood': ['mussel', 'mussel opened', 'mussel closed', 'octopus', 'shrimp peeled', 'shrimp'],
-        'veggies': ['chilli green', 'chilli red', 'chilli yellow', 'olive black', 'olive green',
-            'onion', 'tomato', 'cocktail tomato', 'cucumber', 'pickle']
+        'veggies': ['cucumber', 'pickle', 'chilli green', 'chilli red', 'chilli yellow', 'olive black', 'olive green',
+            'onion', 'tomato', 'cocktail tomato', ]
     });
 
     const [images, setImages] = useState({
