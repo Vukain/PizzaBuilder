@@ -36,8 +36,8 @@ const PineappleImgB = React.lazy(() => import('./media/pineapple_b.svg'));
 const PineappleImgC = React.lazy(() => import('./media/pineapple_c.svg'));
 const ProsciuttoImgA = React.lazy(() => import('./media/prosciutto_a.svg'));
 const ProsciuttoImgB = React.lazy(() => import('./media/prosciutto_b.svg'));
-const RokpolBlueImg = React.lazy(() => import('./media/rokpol_blue.svg'));
-const RokpolGoldImg = React.lazy(() => import('./media/rokpol_gold.svg'));
+const RoquefortBlueImg = React.lazy(() => import('./media/rokpol_blue.svg'));
+const RoquefortGoldImg = React.lazy(() => import('./media/rokpol_gold.svg'));
 const RucolaImgA = React.lazy(() => import('./media/rucola_a.svg'));
 const RucolaImgB = React.lazy(() => import('./media/rucola_b.svg'));
 const RucolaImgC = React.lazy(() => import('./media/rucola_c.svg'));
@@ -82,8 +82,8 @@ const AppProvider = ({ children }) => {
         'oregano': OreganoImg,
         'pineapple': [PineappleImgA, PineappleImgB, PineappleImgC],
         'prosciutto': [ProsciuttoImgA, ProsciuttoImgB],
-        'rokpol blue': RokpolBlueImg,
-        'rokpol gold': RokpolGoldImg,
+        'roquefort blue': RoquefortBlueImg,
+        'roquefort gold': RoquefortGoldImg,
         'rucola': [RucolaImgA, RucolaImgB, RucolaImgC],
         'salami': SalamiRedImg,
         'salami aged': SalamiAgedImg,
