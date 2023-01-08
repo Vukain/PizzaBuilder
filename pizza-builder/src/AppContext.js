@@ -12,8 +12,9 @@ const ChilliYellowImgA = React.lazy(() => import('./media/chilli_yellow_a.svg'))
 const ChilliYellowImgB = React.lazy(() => import('./media/chilli_yellow_b.svg'));
 const ChilliGreenImgA = React.lazy(() => import('./media/chilli_green_a.svg'));
 const ChilliGreenImgB = React.lazy(() => import('./media/chilli_green_b.svg'));
-const CucumberFresh = React.lazy(() => import('./media/cucumber_fresh.svg'));
-const CucumberPickled = React.lazy(() => import('./media/cucumber_pickled.svg'));
+const CucumberFreshImg = React.lazy(() => import('./media/cucumber_fresh.svg'));
+const CucumberPickledImgA = React.lazy(() => import('./media/cucumber_pickled_a.svg'));
+const CucumberPickledImgB = React.lazy(() => import('./media/cucumber_pickled_b.svg'));
 const FetaImgA = React.lazy(() => import('./media/feta_a.svg'));
 const FetaImgB = React.lazy(() => import('./media/feta_b.svg'));
 const HamImgA = React.lazy(() => import('./media/ham_a.svg'));
@@ -59,8 +60,8 @@ const AppProvider = ({ children }) => {
         'herbs/other': ['basil', 'oregano', 'rucola', 'pineapple', 'shroom dark', 'shroom light'],
         'meat': ['ham', 'prosciutto', 'salami', 'salami aged'],
         'seafood': ['mussel', 'mussel opened', 'mussel closed', 'octopus', 'shrimp peeled', 'shrimp'],
-        'veggies': ['cucumber', 'pickle', 'chilli green', 'chilli red', 'chilli yellow', 'olive black', 'olive green',
-            'onion', 'tomato', 'cocktail tomato', ]
+        'veggies': ['cucumber', 'cucumber pickled', 'chilli green', 'chilli red', 'chilli yellow', 'olive black', 'olive green',
+            'onion', 'tomato', 'tomato cocktail', ]
     });
 
     const [images, setImages] = useState({
@@ -87,14 +88,14 @@ const AppProvider = ({ children }) => {
         'rucola': [RucolaImgA, RucolaImgB, RucolaImgC],
         'salami': SalamiRedImg,
         'salami aged': SalamiAgedImg,
-        'shrimp': ShrimpImg,
-        'shrimp shell': ShrimpShellImg,
+        'shrimp peeled': ShrimpImg,
+        'shrimp': ShrimpShellImg,
         'shroom dark': ShroomDarkImg,
         'shroom light': ShroomLightImg,
         'tomato': TomatoBigImg,
-        'cocktail tomato': TomatoSmallImg,
-        'cucumber': CucumberFresh,
-        'pickle': CucumberPickled,
+        'tomato cocktail': TomatoSmallImg,
+        'cucumber': CucumberFreshImg,
+        'cucumber pickled': [CucumberPickledImgA, CucumberPickledImgB]
     });
 
     return (
