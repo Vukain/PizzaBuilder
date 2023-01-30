@@ -1,2 +1,0 @@
-.pizza_building{position:relative;z-index:1;-webkit-box-flex:1;-ms-flex-positive:1;flex-grow:1;overflow:visible}.pizza{position:absolute;height:90vh;width:90vh;max-width:65vw;top:50%;left:50%;-webkit-transform:translate(-50%, -50%);transform:translate(-50%, -50%)}@media (orientation: portrait){.pizza{height:90vw;width:90vw;max-width:65vh}}
-/*# sourceMappingURL=PizzaBase.min.css.map */
