@@ -13,7 +13,7 @@ class Ingredient extends Component {
     constructor(props) {
         super(props);
         this.vertical = ['camembert half', 'basil', 'octopus'];
-        this.verticalCounter = ['prosciutto', 'ham', 'camembert', 'rucola', 'mussel opened', 'mussel closed', 'shrimp shell'];
+        this.verticalCounter = ['prosciutto', 'ham', 'camembert', 'rucola', 'mussel opened', 'mussel closed', 'shrimp'];
         this.ingred = this.props.imag[this.props.type];
         this.tops = document.querySelector('.ingred_dispencer__plate').offsetHeight / 2;
         this.lefts = document.querySelector('.ingred_dispencer__plate').offsetWidth / 2;
