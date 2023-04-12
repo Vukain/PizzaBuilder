@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import reportWebVitals from './reportWebVitals';
 
 import 'normalize.css';
 import './index.css';
@@ -14,4 +13,3 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-reportWebVitals();
