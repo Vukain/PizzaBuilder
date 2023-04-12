@@ -14,7 +14,6 @@
         flex-direction: column
         justify-content: space-between
         background-color: unset
-
         @media(orientation: portrait)
             width: unset
             height: 7vw
@@ -54,6 +53,8 @@
         flex-basis: 14vw
         flex-grow: 1
         background-color: #fff
+        position: relative
+
         @media(orientation: portrait)
             flex-direction: row
             flex-wrap: wrap
@@ -62,7 +63,7 @@
             height: 50vw
             flex-basis: 22vh
             flex-grow: 1
-            padding: 4px
+            padding: 4px 4px 3vh 4px
 
     &__button
         display: block
@@ -94,3 +95,12 @@
         &:hover, &:focus
             color: #fff
             background-color: #54cc94
+
+    &__copy
+        color: #ccc
+        position: absolute
+        left: 50%
+        bottom: 2%
+        transform: translate(-50%, 50%)
+        @media(orientation: portrait)
+            bottom: 6%

@@ -3,8 +3,7 @@ import gsap from 'gsap';
 
 import './IngredientControl.sass';
 
-
-const IngredientControl = (props) => {
+export const IngredientControl = ({ type, controller }) => {
 
     const buttonWrapper = useRef(null);
 
@@ -19,10 +18,8 @@ const IngredientControl = (props) => {
     return (
         <div ref={buttonWrapper}>
             <div>
-                <button className={`ingredient_control__button ingredient_control__button--${props.type}`} onClick={props.controller}>{props.type}</button>
+                <button className={`ingredient_control__button ingredient_control__button--${type}`} onClick={controller}>{type}</button>
             </div>
         </div>
     );
-}
-
-export default IngredientControl;
+};

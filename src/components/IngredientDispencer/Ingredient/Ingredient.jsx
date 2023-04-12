@@ -1,14 +1,12 @@
 import React, { Component, Suspense } from 'react';
 import Hammer from 'react-hammerjs';
-// import Hammor from 'hammerjs';
-
 import gsap from 'gsap';
 
 import './Ingredient.sass';
 
-import IngredControlPanel from '../IngredControlPanel/IngredControlPanel';
+import { IngredControlPanel } from './IngredControlPanel/IngredControlPanel';
 
-class Ingredient extends Component {
+export class Ingredient extends Component {
 
     constructor(props) {
         super(props);
@@ -219,24 +217,17 @@ class Ingredient extends Component {
 
     onFocusHandler = (e) => {
         this.props.setCurrent(this.props.id);
-        // this.setState((prevState) => ({ scale: prevState.scale + 0.2 }));
-    };
-
-    onBlurHandler = (e) => {
-        // this.setState((prevState) => ({ scale: prevState.scale - 0.2 }));
     };
 
     render() {
 
-        const Io = this.state.ingred;
+        const IngredientImage = this.state.ingred;
         const active = this.props.id === this.props.current ? 'ingredient--active' : null;
         const cls = `ingredient ingredient--${this.props.type.replace(' ', '_')} ${active}`;
 
         return (
             <Hammer options={{
-                recognizers: {
-                    rotate: { enable: true }, pinch: { enable: true }
-                }
+                recognizers: { rotate: { enable: true }, pinch: { enable: true } }
             }}
                 onRotateStart={this.onRotateStartHandler}
                 onRotateMove={this.onRotateMoveHandler}
@@ -245,21 +236,19 @@ class Ingredient extends Component {
                 onPinchOut={this.onPinchHandler}
                 onPinchEnd={this.onPinchEndHandler}>
                 <div>
-                    <div tabIndex='1' className={cls} id={this.props.id} onFocus={this.onFocusHandler} onBlur={this.onBlurHandler} onTouchStart={this.onTouchDownHandler} onMouseDown={this.onMouseDownHandler} style={{
+                    <div tabIndex='1' className={cls} id={this.props.id} onFocus={this.onFocusHandler} onTouchStart={this.onTouchDownHandler} onMouseDown={this.onMouseDownHandler} style={{
                         top: `${this.state.y}px`,
                         left: `${this.state.x}px`,
                         transform: ` translate(-50%, -50%) scale(${this.state.scale}) rotateZ(${this.state.rotate}deg)`,
                         cursor: `${this.state.cursor}`,
                     }}>
-                        <Suspense fallback={<div></div>}>
-                            < Io />
+                        <Suspense fallback={<div />}>
+                            < IngredientImage />
                         </Suspense>
                     </div>
-                    {this.props.id === this.props.current ? <IngredControlPanel listener={this.onKeyHandler} control={this.ingredControl} /> : null}
+                    {this.props.id === this.props.current ? <IngredControlPanel listener={this.onKeyHandler} ingredControl={this.ingredControl} /> : null}
                 </div>
 
             </Hammer>);
     };
 };
-
-export default Ingredient;

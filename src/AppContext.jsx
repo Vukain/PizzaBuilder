@@ -55,13 +55,13 @@ const AppProvider = ({ children }) => {
 
     const [ingreds, setIngreds] = useState([]);
     const [currentIngred, setCurrentIngred] = useState(null);
-    const [adders, setAdders] = useState({
+    const [addButtonList, setAddButtonList] = useState({
         'cheese': ['camembert', 'camembert half', 'feta', 'roquefort blue', 'roquefort gold'],
         'herbs/other': ['basil', 'oregano', 'rucola', 'pineapple', 'shroom dark', 'shroom light'],
         'meat': ['ham', 'prosciutto', 'salami', 'salami aged'],
         'seafood': ['mussel', 'mussel opened', 'mussel closed', 'octopus', 'shrimp peeled', 'shrimp'],
         'veggies': ['cucumber', 'cucumber pickled', 'chilli green', 'chilli red', 'chilli yellow', 'olive black', 'olive green',
-            'onion', 'tomato', 'tomato cocktail', ]
+            'onion', 'tomato', 'tomato cocktail',]
     });
 
     const [images, setImages] = useState({
@@ -99,7 +99,7 @@ const AppProvider = ({ children }) => {
     });
 
     return (
-        <AppContext.Provider value={{ ingreds, setIngreds, adders, setAdders, images, setImages, currentIngred, setCurrentIngred }}>
+        <AppContext.Provider value={{ ingreds, setIngreds, addButtonList, setAddButtonList, images, setImages, currentIngred, setCurrentIngred }}>
             {children}
         </AppContext.Provider>
     );

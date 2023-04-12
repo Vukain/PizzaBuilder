@@ -2,18 +2,15 @@ import React, { useContext } from 'react';
 
 import './PizzaBase.sass';
 
-import PizzaImg from '../../media/pizza_base.svg';
 import { AppContext } from '../../AppContext';
+import PizzaImg from '../../media/pizza_base.svg';
 
-const PizzaBase = () => {
+export const PizzaBase = () => {
 
     const { setCurrentIngred } = useContext(AppContext);
 
     return (
         <div className="pizza_building" onClick={() => { setCurrentIngred(null) }}>
             <PizzaImg className="pizza" />
-        </div>)
-        ;
-}
-
-export default PizzaBase;
+        </div>);
+};
