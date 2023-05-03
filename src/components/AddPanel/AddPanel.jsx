@@ -40,7 +40,6 @@ export const AddPanel = () => {
             </div>
             <div className='ingred_adder__buttons'>
                 {addbuttons}
-                <div className='ingred_adder__copy'>&copy; 2021 Vukain</div>
             </div>
         </div>);
 };

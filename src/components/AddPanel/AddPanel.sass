@@ -1,5 +1,5 @@
 .ingred_adder
-    z-index: 2
+    z-index: 3
     display: flex
     flex-grow: 0
     flex-basis: 17vw
@@ -63,7 +63,8 @@
             height: 50vw
             flex-basis: 22vh
             flex-grow: 1
-            padding: 4px 4px 3vh 4px
+            padding: 4px 4px 4px 4px
+            position: unset
 
     &__button
         display: block
@@ -95,12 +96,3 @@
         &:hover, &:focus
             color: #fff
             background-color: #54cc94
-
-    &__copy
-        color: #ccc
-        position: absolute
-        left: 50%
-        bottom: 2%
-        transform: translate(-50%, 50%)
-        @media(orientation: portrait)
-            bottom: 6%
