@@ -52,57 +52,77 @@ const TomatoBigImg = React.lazy(() => import('./media/tomato_big.svg'));
 const TomatoSmallImg = React.lazy(() => import('./media/tomato_small.svg'));
 
 const AppProvider = ({ children }) => {
+  const [ingreds, setIngreds] = useState([]);
+  const [currentIngred, setCurrentIngred] = useState(null);
+  const [addButtonList, setAddButtonList] = useState({
+    cheese: ['camembert', 'camembert half', 'feta', 'roquefort blue', 'roquefort gold'],
+    'herbs/other': ['basil', 'oregano', 'rucola', 'pineapple', 'shroom dark', 'shroom light'],
+    meat: ['ham', 'prosciutto', 'salami', 'salami aged'],
+    seafood: ['mussel', 'mussel opened', 'mussel closed', 'octopus', 'shrimp peeled', 'shrimp'],
+    veggies: [
+      'cucumber',
+      'cucumber pickled',
+      'chilli green',
+      'chilli red',
+      'chilli yellow',
+      'olive black',
+      'olive green',
+      'onion',
+      'tomato',
+      'tomato cocktail',
+    ],
+  });
 
-    const [ingreds, setIngreds] = useState([]);
-    const [currentIngred, setCurrentIngred] = useState(null);
-    const [addButtonList, setAddButtonList] = useState({
-        'cheese': ['camembert', 'camembert half', 'feta', 'roquefort blue', 'roquefort gold'],
-        'herbs/other': ['basil', 'oregano', 'rucola', 'pineapple', 'shroom dark', 'shroom light'],
-        'meat': ['ham', 'prosciutto', 'salami', 'salami aged'],
-        'seafood': ['mussel', 'mussel opened', 'mussel closed', 'octopus', 'shrimp peeled', 'shrimp'],
-        'veggies': ['cucumber', 'cucumber pickled', 'chilli green', 'chilli red', 'chilli yellow', 'olive black', 'olive green',
-            'onion', 'tomato', 'tomato cocktail',]
-    });
+  const [images, setImages] = useState({
+    basil: [BasilImgA, BasilImgB],
+    camembert: CamembertImg,
+    'camembert half': CamembertHalfImg,
+    'chilli green': [ChilliGreenImgA, ChilliGreenImgB],
+    'chilli red': [ChilliRedImgA, ChilliRedImgB],
+    'chilli yellow': [ChilliYellowImgA, ChilliYellowImgB],
+    feta: [FetaImgA, FetaImgB],
+    ham: [HamImgA, HamImgB],
+    mussel: [MusselImgA, MusselImgB],
+    'mussel opened': [MusselOpenImgA, MusselOpenImgB],
+    'mussel closed': MusselClosedImg,
+    octopus: [OctopusImgA, OctopusImgB],
+    'olive black': [OliveBlackImgA, OliveBlackImgB],
+    'olive green': [OliveGreenImgA, OliveGreenImgB],
+    onion: OnionImg,
+    oregano: OreganoImg,
+    pineapple: [PineappleImgA, PineappleImgB, PineappleImgC],
+    prosciutto: [ProsciuttoImgA, ProsciuttoImgB],
+    'roquefort blue': RoquefortBlueImg,
+    'roquefort gold': RoquefortGoldImg,
+    rucola: [RucolaImgA, RucolaImgB, RucolaImgC],
+    salami: SalamiRedImg,
+    'salami aged': SalamiAgedImg,
+    'shrimp peeled': ShrimpImg,
+    shrimp: ShrimpShellImg,
+    'shroom dark': ShroomDarkImg,
+    'shroom light': ShroomLightImg,
+    tomato: TomatoBigImg,
+    'tomato cocktail': TomatoSmallImg,
+    cucumber: CucumberFreshImg,
+    'cucumber pickled': [CucumberPickledImgA, CucumberPickledImgB],
+  });
 
-    const [images, setImages] = useState({
-        'basil': [BasilImgA, BasilImgB],
-        'camembert': CamembertImg,
-        'camembert half': CamembertHalfImg,
-        'chilli green': [ChilliGreenImgA, ChilliGreenImgB],
-        'chilli red': [ChilliRedImgA, ChilliRedImgB],
-        'chilli yellow': [ChilliYellowImgA, ChilliYellowImgB],
-        'feta': [FetaImgA, FetaImgB],
-        'ham': [HamImgA, HamImgB],
-        'mussel': [MusselImgA, MusselImgB],
-        'mussel opened': [MusselOpenImgA, MusselOpenImgB],
-        'mussel closed': MusselClosedImg,
-        'octopus': [OctopusImgA, OctopusImgB],
-        'olive black': [OliveBlackImgA, OliveBlackImgB],
-        'olive green': [OliveGreenImgA, OliveGreenImgB],
-        'onion': OnionImg,
-        'oregano': OreganoImg,
-        'pineapple': [PineappleImgA, PineappleImgB, PineappleImgC],
-        'prosciutto': [ProsciuttoImgA, ProsciuttoImgB],
-        'roquefort blue': RoquefortBlueImg,
-        'roquefort gold': RoquefortGoldImg,
-        'rucola': [RucolaImgA, RucolaImgB, RucolaImgC],
-        'salami': SalamiRedImg,
-        'salami aged': SalamiAgedImg,
-        'shrimp peeled': ShrimpImg,
-        'shrimp': ShrimpShellImg,
-        'shroom dark': ShroomDarkImg,
-        'shroom light': ShroomLightImg,
-        'tomato': TomatoBigImg,
-        'tomato cocktail': TomatoSmallImg,
-        'cucumber': CucumberFreshImg,
-        'cucumber pickled': [CucumberPickledImgA, CucumberPickledImgB]
-    });
-
-    return (
-        <AppContext.Provider value={{ ingreds, setIngreds, addButtonList, setAddButtonList, images, setImages, currentIngred, setCurrentIngred }}>
-            {children}
-        </AppContext.Provider>
-    );
-}
+  return (
+    <AppContext.Provider
+      value={{
+        ingreds,
+        setIngreds,
+        addButtonList,
+        setAddButtonList,
+        images,
+        setImages,
+        currentIngred,
+        setCurrentIngred,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
+};
 
 export default AppProvider;

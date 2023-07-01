@@ -8,16 +8,13 @@ import { IngredientDispencer } from './components/IngredientDispencer/Ingredient
 import { PizzaBase } from './components/PizzaBase/PizzaBase';
 
 export const App = () => {
-
   return (
     <AppProvider>
-
-      <div className="App" >
+      <div className="App">
         <PizzaBase />
         <IngredientDispencer />
         <AddPanel />
       </div>
-
     </AppProvider>
   );
 };
